@@ -440,7 +440,7 @@
     transition: transform 0.2s;
   }
   .calc-result-card:hover { transform: translateY(-2px); }
-  .calc-result-icon { font-size: 28px; margin-bottom: 0.5rem; }
+  .calc-result-icon { width: 56px; height: 56px; border-radius: 14px; background: rgba(102,91,162,0.07); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.75rem; }
   .calc-result-num {
     font-family: 'Nunito', sans-serif;
     font-size: 1.8rem; font-weight: 800;
@@ -771,6 +771,16 @@
     .recon-flag-banner { padding: 0.4rem 0.6rem; }
   }
 
+
+  /* ── FIREWORKS ── */
+  .ba-fireworks {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none; overflow: hidden; border-radius: 16px;
+    z-index: 0;
+  }
+  .ba-cards { position: relative; }
+  #ba-card-after { position: relative; overflow: hidden; }
+
 </style>
 </head>
 <body>
@@ -927,17 +937,17 @@
 
     <div class="calc-results reveal delay-4">
       <div class="calc-result-card highlight">
-        <div class="calc-result-icon">&#128181;</div>
+        <div class="calc-result-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#665BA2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v12"/><path d="M15 9H9.5a2.5 2.5 0 0 0 0 5h5a2.5 2.5 0 0 1 0 5H8"/></svg></div>
         <div class="calc-result-num" id="leakage-annual">$40,000</div>
         <div class="calc-result-label">Estimated annual commission leakage at 2%</div>
       </div>
       <div class="calc-result-card">
-        <div class="calc-result-icon">&#128197;</div>
+        <div class="calc-result-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#84BBAD" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
         <div class="calc-result-num" id="leakage-monthly">$3,333</div>
         <div class="calc-result-label">Estimated monthly commission leakage at 2% going undetected</div>
       </div>
       <div class="calc-result-card">
-        <div class="calc-result-icon">&#9203;</div>
+        <div class="calc-result-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#CFC59E" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2h14"/><path d="M5 22h14"/><path d="M17 2v4l-5 6 5 6v4"/><path d="M7 2v4l5 6-5 6v4"/></svg></div>
         <div class="calc-result-num" id="time-wasted">3 days</div>
         <div class="calc-result-label">Estimated time wasted on manual reconciliation per month</div>
       </div>
@@ -1066,8 +1076,8 @@
     <h2 class="sec-h2 reveal reveal-left">See the difference Benefit Whiz makes.</h2>
     <p class="sec-sub">Toggle between the manual process most brokerages still use and what Benefit Whiz does automatically.</p>
     <div class="ba-toggle-wrap reveal">
-      <button class="ba-btn active" id="ba-before" onclick="showBefore()">&#128197; Without Benefit Whiz</button>
-      <button class="ba-btn" id="ba-after" onclick="showAfter()">&#9889; With Benefit Whiz</button>
+      <button class="ba-btn active" id="ba-before" onclick="showBefore()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-3px;margin-right:6px;"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Without Benefit Whiz</button>
+      <button class="ba-btn" id="ba-after" onclick="showAfter()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-3px;margin-right:6px;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>With Benefit Whiz</button>
     </div>
     <div class="ba-cards reveal delay-2">
       <div class="ba-card" id="ba-card-before">
@@ -1079,6 +1089,7 @@
         <div class="ba-time">&#9203; Average time: <strong>3&ndash;5 days per month</strong></div>
       </div>
       <div class="ba-card hidden" id="ba-card-after">
+        <canvas id="fw-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;border-radius:16px;"></canvas>
         <div class="ba-row"><div class="ba-icon ba-green">&#10003;</div><div class="ba-text"><strong>Upload any carrier format</strong><span>CSV, Excel or PDF — auto-normalized instantly</span></div></div>
         <div class="ba-row"><div class="ba-icon ba-green">&#10003;</div><div class="ba-text"><strong>Automatic reconciliation</strong><span>98% match rate on first pass, no manual cleanup</span></div></div>
         <div class="ba-row"><div class="ba-icon ba-green">&#10003;</div><div class="ba-text"><strong>Gaps flagged instantly</strong><span>Missing or incorrect payments surfaced in real time</span></div></div>
@@ -1619,6 +1630,70 @@ function showAfter() {
   if ('ontouchstart' in window) {
     document.removeEventListener('mousemove', function(){});
   }
+})();
+</script>
+
+
+<<script>
+(function(){
+  var c, ctx, p = [], id;
+
+  function sz() {
+    c = document.getElementById('fw-canvas');
+    if (!c) return;
+    ctx = c.getContext('2d');
+    c.width = c.offsetWidth;
+    c.height = c.offsetHeight;
+  }
+
+  function burst(x, y) {
+    var cols = ['#665BA2','#84BBAD','#CFC59E','#A0CADB','#ffffff','#f0997b'];
+    for (var i = 0; i < 40; i++) {
+      var a = (Math.PI*2/40)*i;
+      var s = 3 + Math.random()*5;
+      p.push({
+        x:x, y:y,
+        vx: Math.cos(a)*s, vy: Math.sin(a)*s - 2,
+        a: 1, col: cols[i % cols.length],
+        r: 2 + Math.random()*4,
+        d: 0.01 + Math.random()*0.008
+      });
+    }
+  }
+
+  function loop() {
+    if (!ctx || !c) return;
+    ctx.clearRect(0, 0, c.width, c.height);
+    p = p.filter(function(pt) {
+      pt.x += pt.vx; pt.y += pt.vy; pt.vy += 0.1; pt.a -= pt.d;
+      if (pt.a <= 0) return false;
+      ctx.save(); ctx.globalAlpha = pt.a; ctx.fillStyle = pt.col;
+      ctx.beginPath(); ctx.arc(pt.x, pt.y, pt.r, 0, Math.PI*2); ctx.fill();
+      ctx.restore();
+      return true;
+    });
+    if (p.length) id = requestAnimationFrame(loop);
+  }
+
+  function launch() {
+    sz();
+    if (!c) return;
+    p = []; cancelAnimationFrame(id);
+    var w = c.width, h = c.height;
+    burst(w*.5, h*.4);
+    setTimeout(function(){burst(w*.2, h*.3);}, 200);
+    setTimeout(function(){burst(w*.8, h*.35);}, 400);
+    setTimeout(function(){burst(w*.35, h*.2);}, 600);
+    loop();
+  }
+
+  var orig = window.showAfter;
+  window.showAfter = function() {
+    if (orig) orig();
+    setTimeout(launch, 60);
+  };
+
+  window.addEventListener('resize', sz);
 })();
 </script>
 
