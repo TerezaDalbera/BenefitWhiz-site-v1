@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BenefitWhiz — Commission Intelligence Platform</title>
+<title>Benefit Whiz — Commission Intelligence Platform</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <style>
@@ -339,33 +339,7 @@
   }
 
 
-  /* ── MONEY INTO HAND SECTION ── */
-  .money-section { background: #fff; padding: 80px 2.5rem; }
-  .money-animation-wrap { display: flex; align-items: center; gap: 4rem; flex-direction: row; }
-  .money-scene { flex: 1; position: relative; height: 260px; overflow: visible; min-width: 320px; }
-  .money-text { flex: 1; }
-
-  /* Bills */
-  .bill { position: absolute; width: 80px; opacity: 0; }
-  .bill svg { width: 100%; height: auto; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.1)); }
-
-  .bill-1 { top: 10%;  left: 0%;   animation: billFly 3s ease-in-out 0s   infinite; }
-  .bill-2 { top: 35%;  left: 0%;   animation: billFly 3s ease-in-out 0.7s infinite; }
-  .bill-3 { top: 58%;  left: 0%;   animation: billFly 3s ease-in-out 1.4s infinite; }
-  .bill-4 { top: 22%;  left: 0%;   animation: billFly 3s ease-in-out 2.1s infinite; }
-
-  @keyframes billFly {
-    0%   { opacity: 0;   transform: translateX(0)   translateY(0)   rotate(-5deg) scale(0.8); }
-    15%  { opacity: 1;   transform: translateX(40px) translateY(-8px) rotate(0deg) scale(1); }
-    70%  { opacity: 1;   transform: translateX(260px) translateY(20px) rotate(3deg) scale(0.95); }
-    85%  { opacity: 0.6; transform: translateX(340px) translateY(40px) rotate(5deg) scale(0.8); }
-    100% { opacity: 0;   transform: translateX(380px) translateY(50px) rotate(8deg) scale(0.6); }
-  }
-
-  /* Hand */
-  .piggy-wrap { position: absolute; right: 0; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; }
-  .piggy-svg { width: 200px; filter: drop-shadow(0 4px 20px rgba(102,91,162,0.1)); animation: piggyBob 2s ease-in-out infinite; }
-  .piggy-label { font-size: 12px; font-weight: 700; color: var(--scampi); letter-spacing: 0.5px; text-transform: uppercase; }
+  
   .coin { animation: coinDrop 3s ease-in infinite; }
 
   @keyframes piggyBob {
@@ -386,13 +360,403 @@
   .money-stat-num { font-size: 1.8rem; font-weight: 800; color: var(--scampi); line-height: 1; }
   .money-stat-label { font-size: 12px; color: var(--text-muted); }
 
+
+  /* ── REVENUE CALCULATOR ── */
+  .calc-section {
+    background: #fff;
+    padding: 80px 2.5rem;
+  }
+  .calc-wrap {
+    max-width: 860px; margin: 0 auto; width: 100%;
+    text-align: center;
+  }
+  .calc-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(102,91,162,0.08); border: 1px solid rgba(102,91,162,0.2);
+    color: var(--scampi); font-size: 11px; font-weight: 700;
+    letter-spacing: 1.8px; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 100px; margin-bottom: 1.5rem;
+  }
+  .calc-heading {
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700; color: var(--blue-zodiac);
+    line-height: 1.15; margin-bottom: 1rem; letter-spacing: -0.3px;
+  }
+  .calc-heading em { font-style: italic; color: var(--scampi); }
+  .calc-sub {
+    font-size: 17px; color: var(--text-mid);
+    margin-bottom: 3rem; line-height: 1.6;
+  }
+  .calc-card {
+    position: relative; overflow: hidden;
+    background: #f5f4fb;
+    border: 1.5px solid rgba(102,91,162,0.15);
+    border-radius: 20px; padding: 2.5rem;
+    margin-bottom: 2rem;
+  }
+  .calc-label {
+    font-size: 15px; font-weight: 600; color: var(--blue-zodiac);
+    margin-bottom: 0.75rem; text-align: left;
+  }
+  .calc-value-display {
+    font-size: 2rem; font-weight: 800; color: var(--scampi);
+    margin-bottom: 1rem; text-align: left;
+    font-family: 'Nunito', sans-serif;
+  }
+  .calc-slider {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 6px; border-radius: 6px;
+    background: linear-gradient(90deg, #665BA2 0%, #84BBAD 100%);
+    outline: none; margin-bottom: 0.5rem;
+    cursor: pointer;
+  }
+  .calc-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: #fff; border: 3px solid #665BA2;
+    box-shadow: 0 2px 8px rgba(102,91,162,0.3);
+    cursor: pointer;
+  }
+  .calc-slider::-moz-range-thumb {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: #fff; border: 3px solid #665BA2;
+    box-shadow: 0 2px 8px rgba(102,91,162,0.3);
+    cursor: pointer;
+  }
+  .calc-range-labels {
+    display: flex; justify-content: space-between;
+    font-size: 12px; color: var(--text-muted);
+  }
+  .calc-results {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem; margin-top: 2rem;
+  }
+  .calc-result-card {
+    background: #fff; border-radius: 14px;
+    border: 1.5px solid rgba(102,91,162,0.12);
+    padding: 1.5rem; text-align: center;
+    transition: transform 0.2s;
+  }
+  .calc-result-card:hover { transform: translateY(-2px); }
+  .calc-result-icon { font-size: 28px; margin-bottom: 0.5rem; }
+  .calc-result-num {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.8rem; font-weight: 800;
+    color: var(--scampi); line-height: 1;
+    margin-bottom: 0.35rem;
+  }
+  .calc-result-label {
+    font-size: 12px; color: var(--text-muted); line-height: 1.4;
+  }
+  .calc-result-card.highlight {
+    background: linear-gradient(135deg, rgba(102,91,162,0.08), rgba(132,187,173,0.08));
+    border-color: var(--scampi);
+  }
+  .calc-result-card.highlight .calc-result-num { color: var(--scampi); }
+  .calc-cta {
+    margin-top: 2rem;
+    display: flex; align-items: center; justify-content: center; gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .calc-disclaimer {
+    font-size: 12px; color: var(--text-muted);
+    margin-top: 1.25rem;
+  }
+  @media (max-width: 640px) {
+    .calc-results { grid-template-columns: 1fr; }
+  }
+
+
+
+  /* ── HERO HEADING SLIDE IN ── */
+  .hero-h1 {
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(2.2rem, 3.8vw, 3.4rem);
+    line-height: 1.2; font-weight: 700;
+    color: #fff; margin-bottom: 1.5rem;
+    letter-spacing: -0.3px;
+    display: flex; flex-wrap: wrap; gap: 0 0.35em;
+  }
+  .slide-word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateX(-30px);
+    animation: slideWordIn 0.5s ease forwards;
+  }
+  @keyframes slideWordIn {
+    from { opacity: 0; transform: translateX(-30px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+
+
+
+
+
+  /* ── PARTICLE TRAIL ── */
+  .particle-trail {
+    position: fixed; pointer-events: none; z-index: 9999;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: rgba(160,202,219,0.6);
+    transform: translate(-50%,-50%);
+    transition: none;
+  }
+
+  /* ── BEFORE/AFTER ── */
+  .ba-section { background: rgba(207,197,158,0.12); padding: 80px 2.5rem; border-top: 1px solid rgba(207,197,158,0.25); border-bottom: 1px solid rgba(207,197,158,0.25); }
+  .ba-toggle-wrap { display: flex; gap: 0; margin: 2rem 0; border: 2px solid var(--lavender-grey); border-radius: 12px; overflow: hidden; width: fit-content; }
+  .ba-btn { padding: 12px 24px; font-size: 14px; font-weight: 700; border: none; background: transparent; color: var(--text-mid); cursor: pointer; font-family: inherit; transition: all 0.2s; }
+  .ba-btn.active { background: var(--scampi); color: #fff; }
+  .ba-cards { position: relative; }
+  .ba-card { background: var(--white); border: 1.5px solid var(--lavender-grey); border-radius: 16px; padding: 2rem; transition: opacity 0.3s; }
+  .ba-card.hidden { display: none; }
+  .ba-row { display: flex; align-items: flex-start; gap: 1rem; padding: 0.85rem 0; border-bottom: 1px solid rgba(189,195,215,0.3); }
+  .ba-row:last-of-type { border-bottom: none; }
+  .ba-icon { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+  .ba-red   { background: rgba(216,90,48,0.12); color: #D85A30; }
+  .ba-green { background: rgba(132,187,173,0.2); color: var(--gulf-stream); }
+  .ba-text { display: flex; flex-direction: column; gap: 3px; }
+  .ba-text strong { font-size: 14px; color: var(--blue-zodiac); }
+  .ba-text span   { font-size: 13px; color: var(--text-muted); }
+  .ba-time { margin-top: 1.25rem; padding: 0.75rem 1rem; background: var(--bg-section); border-radius: 8px; font-size: 13px; color: var(--text-mid); }
+
+
+
+
+  /* ── CALC HEADING SLIDE ── */
+  .slide-left {
+    display: inline-block;
+    opacity: 0; transform: translateX(-60px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .slide-right {
+    display: inline-block;
+    opacity: 0; transform: translateX(60px);
+    transition: opacity 0.7s ease 0.3s, transform 0.7s ease 0.3s;
+  }
+  .slide-left.visible  { opacity: 1; transform: translateX(0); }
+  .slide-right.visible { opacity: 1; transform: translateX(0); }
+
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.reveal-left {
+    transform: translateX(-40px);
+  }
+  .reveal.reveal-right {
+    transform: translateX(40px);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  .reveal.delay-1 { transition-delay: 0.1s; }
+  .reveal.delay-2 { transition-delay: 0.2s; }
+  .reveal.delay-3 { transition-delay: 0.3s; }
+  .reveal.delay-4 { transition-delay: 0.4s; }
+  .reveal.delay-5 { transition-delay: 0.5s; }
+
+
+  /* ── BACKGROUND NEGATIVE NUMBER ── */
+  .calc-bg-num {
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 7rem;
+    color: rgba(102,91,162,0.07);
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    letter-spacing: -4px;
+    line-height: 1;
+  }
+
+
+  /* ── BROKEN HEADING ANIMATION ── */
+  .problems-heading-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+  .broken-word {
+    display: inline-block;
+    position: relative;
+  }
+  .broken-char {
+    display: inline-block;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+  }
+  .broken-char.drop {
+    animation: charDrop 1s ease forwards;
+  }
+  @keyframes charDrop {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+    60%  { transform: translateY(40px) rotate(15deg); opacity: 0.5; }
+    100% { transform: translateY(80px) rotate(25deg); opacity: 0; }
+  }
+
+  /* Spilling dollar signs */
+  .spill-container {
+    position: relative;
+    height: 60px;
+    overflow: visible;
+    margin-top: -10px;
+    margin-bottom: 1rem;
+  }
+  .spill-dollar {
+    position: absolute;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    color: var(--akaroa);
+    opacity: 0;
+    animation: spillOut linear forwards;
+  }
+  @keyframes spillOut {
+    0%   { opacity: 0; transform: translateY(-10px) rotate(0deg) scale(0.5); }
+    20%  { opacity: 1; }
+    80%  { opacity: 0.7; }
+    100% { opacity: 0; transform: translateY(60px) rotate(var(--rot)) scale(1); }
+  }
+
+
+  /* ── MOBILE RESPONSIVE ── */
+
+  /* Hamburger button */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column; justify-content: center;
+    gap: 5px; background: none; border: none;
+    cursor: pointer; padding: 4px; z-index: 200;
+  }
+  .nav-hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: #fff; border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  @media (max-width: 768px) {
+
+    /* NAV */
+    .nav-hamburger { display: flex; }
+    .nav-links {
+      display: none; flex-direction: column;
+      position: fixed; top: 64px; left: 0; right: 0;
+      background: rgba(57,64,80,0.98);
+      padding: 1.5rem; gap: 0; z-index: 99;
+      border-bottom: 1px solid rgba(160,202,219,0.15);
+    }
+    .nav-links.open { display: flex; }
+    .nav-links li { padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav-links li:last-child { border-bottom: none; }
+    .nav-links a { font-size: 15px !important; }
+    .nav-cta { display: inline-block; margin-top: 0.5rem; text-align: center; }
+
+    /* HERO */
+    .hero { padding: 90px 1.25rem 60px; min-height: auto; }
+    .hero-grid { grid-template-columns: 1fr !important; gap: 2rem; }
+    .hero h1, .hero-h1 { font-size: 2rem !important; }
+    .hero-desc { font-size: 15px; }
+    .hero-stats-row { display: none; }
+    .recon-wrap { width: 100%; }
+    .recon-card { padding: 1.25rem 1rem; }
+    .recon-body { gap: 0; }
+    .recon-divider { margin: 0 0.3rem; }
+    .rrow-name { font-size: 11px; }
+    .rrow-sub  { font-size: 10px; }
+    .rrow-amt  { font-size: 11px; }
+    .float-tag { display: none; }
+
+    /* BENEFITS STRIPE */
+    .benefits-stripe { gap: 1rem; padding: 0.75rem 1.25rem; }
+    .b-item { font-size: 12px; }
+
+    /* CALCULATOR */
+    .calc-section { padding: 50px 1.25rem; }
+    .calc-wrap { max-width: 100%; }
+    .calc-heading { font-size: 1.7rem !important; }
+    .calc-results { grid-template-columns: 1fr !important; gap: 0.75rem; }
+    .calc-cta { flex-direction: column; align-items: stretch; }
+    .calc-cta a { text-align: center; }
+
+    /* PROBLEMS */
+    .problems { padding: 60px 1.25rem; }
+    .prob-grid { grid-template-columns: 1fr !important; gap: 1rem; }
+
+    /* HOW IT WORKS */
+    .how { padding: 50px 1.25rem; }
+    .tl-row { flex-wrap: wrap; gap: 1rem; justify-content: center; }
+    .tl-step { flex: 0 0 calc(33% - 0.5rem); min-width: 80px; }
+    .tl-connector { display: none; }
+    .tl-circle { width: 52px; height: 52px; font-size: 0.95rem; }
+    .tl-label { font-size: 11px; }
+
+    /* BEFORE/AFTER */
+    .ba-section { padding: 50px 1.25rem; }
+    .ba-toggle-wrap { width: 100%; }
+    .ba-btn { flex: 1; font-size: 13px; padding: 10px 12px; }
+
+    /* CAPABILITIES */
+    .caps { padding: 50px 1.25rem; }
+    .caps-grid { grid-template-columns: 1fr !important; gap: 1rem; }
+
+    /* WHO */
+    .who { padding: 50px 1.25rem; }
+    .who-grid { grid-template-columns: 1fr !important; gap: 1rem; }
+
+    /* MONEY SECTION */
+    .money-animation-wrap { flex-direction: column !important; gap: 2rem; }
+    .money-scene { min-width: unset; width: 100%; height: 180px; }
+    .piggy-wrap { right: 50%; transform: translate(50%, -50%); }
+
+    /* CTA */
+    .cta-section { padding: 60px 1.25rem; }
+    .cta-form { padding: 1.5rem 1.25rem; }
+
+    /* FOOTER */
+    footer { flex-direction: column; text-align: center; gap: 0.75rem; padding: 1.5rem 1.25rem; }
+    .footer-links { justify-content: center; }
+
+    /* SECTIONS GENERAL */
+    section { padding: 50px 1.25rem; }
+    .sec-h2 { font-size: 1.6rem !important; }
+    .container { padding: 0; }
+
+    /* DISABLE PARTICLE TRAIL ON TOUCH */
+    .particle-trail { display: none; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-h1, .hero h1 { font-size: 1.7rem !important; }
+    .calc-heading { font-size: 1.4rem !important; }
+    .tl-step { flex: 0 0 calc(50% - 0.5rem); }
+    .recon-panels { flex-direction: column; }
+    .recon-divider { display: none; }
+    #panel-right { border-top: 1px solid rgba(160,202,219,0.15); padding-top: 0.5rem; }
+  }
+
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="#" class="nav-logo"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MzEuNzMgMjEzLjEiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojZmZmO308L3N0eWxlPjwvZGVmcz48dGl0bGU+QldfbG9nb19yZXZlcnNlZDwvdGl0bGU+PGcgaWQ9IkxheWVyXzIiIGRhdGEtbmFtZT0iTGF5ZXIgMiI+PGcgaWQ9IkxheWVyXzEtMiIgZGF0YS1uYW1lPSJMYXllciAxIj48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik02OS43MiwyMDBhNjMsNjMsMCwwLDEtNjMtNjIuOTVWMjlhNS40LDUuNCwwLDEsMSwxMC44LDBWMTM3LjA1QTUyLjIxLDUyLjIxLDAsMCwwLDY5LjcyLDE4OS4yYzI4LjQ4LDAsNTAuNzktMjIuODYsNTAuNzktNTIsMC0xOC04LTMyLjY4LTIyLjIyLTQxLjM1bC42Miw0Ny40MWEyMy44MSwyMy44MSwwLDAsMS04LjIzLDE4LjQ3LDM2LjA5LDM2LjA5LDAsMCwxLTIyLjQyLDguNzgsNS4zMSw1LjMxLDAsMCwxLS44LDBINjYuOGMtMTAuMywwLTE5LjEzLTQuMTgtMjQuODUtMTEuNzZhMjAuNjIsMjAuNjIsMCwwLDEtNC4xMy0xMi4zNlYxMDEuNWE1LjQsNS40LDAsMCwxLDEwLjgsMHY0NC44OGE5Ljc2LDkuNzYsMCwwLDAsMS45NCw1Ljg1LDE4LjIxLDE4LjIxLDAsMCwwLDExLjc1LDcuMDlWOTAuMDdhNS40LDUuNCwwLDAsMSwxMC44LDBWMTU5YTI1LjIzLDI1LjIzLDAsMCwwLDEwLjU0LTUuNDcsMTMsMTMsMCwwLDAsNC40Ni0xMC4xM2wtLjc0LTU2LjA4YTUuNjUsNS42NSwwLDAsMSw3LjcxLTUuMTZjMjIuNjgsOS4zNiwzNi4yMiwyOS45MywzNi4yMiw1NUMxMzEuMywxNzIuNCwxMDQuMjUsMjAwLDY5LjcyLDIwMFpNNjkuNTgsNzAuMDdhNS40NSw1LjQ1LDAsMCwxLTEuNDEtLjE4LDUuNCw1LjQsMCwwLDEtNS40Ni01LjRjMC01MS44MS01NS4wOC01My42NC01Ny40My01My42OUE1LjQsNS40LDAsMCwxLDUuNSwwLDg5LjY3LDg5LjY3LDAsMCwxLDM5LjA5LDguMzdDNTAsMTMuNjEsNjIuMzUsMjIuODYsNjguODgsMzljNi41NS0xNiwxOC44Ni0yNS4yLDI5LjcxLTMwLjQyQTg5LjQ4LDg5LjQ4LDAsMCwxLDEzMi4xOC4xOSw1LjQsNS40LDAsMSwxLDEzMi40LDExaDBDMTMwLjA2LDExLDc1LDEyLjg2LDc1LDY0LjY4QTUuMzksNS4zOSwwLDAsMSw2OS41OCw3MC4wN1pNOTAuNzIsNTcuMzNhNS4zNCw1LjM0LDAsMCwxLTMuODEtMS41OCw1LjM5LDUuMzksMCwwLDEsMC03LjYzbDQuMjUtNC4yNmE1LjQsNS40LDAsMCwxLDcuNjMsNy42NGwtNC4yNSw0LjI1QTUuMzQsNS4zNCwwLDAsMSw5MC43Miw1Ny4zM1ptLTQ1LDBhNS4zNyw1LjM3LDAsMCwxLTMuODItMS41OEwzNy42Myw1MS41YTUuNCw1LjQsMCwwLDEsNy42NC03LjY0bDQuMjUsNC4yNmE1LjQsNS40LDAsMCwxLTMuODIsOS4yMVoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xODguNTksNTUuM2EzMC4xMywzMC4xMywwLDAsMSwzMC4xNSwzMC4xLDMwLDMwLDAsMCwxLTUxLjM3LDIxLjI3LDI4LjUxLDI4LjUxLDAsMCwxLTguODItMjEuMjdWNjAuOTFxMC02LjEzLDAtMTIuMjF0MC0xMi4zM2E0Ljg2LDQuODYsMCwwLDEsLjItMS41OCwzLDMsMCwwLDEsLjU2LTFBNS4yNyw1LjI3LDAsMCwxLDE2MywzMmE1LjM4LDUuMzgsMCwwLDEsMy41NiwxLjc2LDMuMSwzLjEsMCwwLDEsLjYyLDEuMDUsNC45MSw0LjkxLDAsMCwxLC4yLDEuNTJWNjQuMjRhMzUsMzUsMCwwLDEsMi44MS0yLjUxLDM1LjcyLDM1LjcyLDAsMCwxLDMtMi4xNiwzMy4yLDMzLjIsMCwwLDEsNy40OC0zLjE2QTI5LDI5LDAsMCwxLDE4OC41OSw1NS4zWm0wLDUxLjQ5QTIxLjI1LDIxLjI1LDAsMCwwLDIxMCw4NS40YTIwLjYsMjAuNiwwLDAsMC02LjItMTUuMTQsMjAuOTMsMjAuOTMsMCwwLDAtNy00LjdBMjEuNzMsMjEuNzMsMCwwLDAsMTg4LjU5LDY0LDIxLjE1LDIxLjE1LDAsMCwwLDE2Ny4zMSw4NS40YTIxLDIxLDAsMCwwLDYuMTQsMTUuMTRBMjAuNjEsMjAuNjEsMCwwLDAsMTg4LjU5LDEwNi43OVoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yODcuODYsODUuMTFjMCwuMTUsMCwuMzMsMCwuNTJhMi40OCwyLjQ4LDAsMCwxLS4yMS43MWwuMDYtLjA2YTMuOTMsMy45MywwLDAsMS00LjE1LDMuMTVIMjM3LjJhMTkuNzUsMTkuNzUsMCwwLDAsMiw2LjIsMjAuMzcsMjAuMzcsMCwwLDAsNC4xNSw1LjMyLDIwLDIwLDAsMCwwLDE0LjYxLDYsMjAuNDYsMjAuNDYsMCwwLDAsNS4wOS0uNjIsMjUuNDEsMjUuNDEsMCwwLDAsNC43OS0xLjc4aC0uMDZhMjAuOTQsMjAuOTQsMCwwLDAsNy42LTYuNzgsNC42OCw0LjY4LDAsMCwxLDIuOTItMS44MUgyNzlhNC41OSw0LjU5LDAsMCwxLDIuNC43LDQuMTQsNC4xNCwwLDAsMSwxLjkzLDIuODEuNzIuNzIsMCwwLDEsLjA4LjQxLDIuNzcsMi43NywwLDAsMCwwLC40Niw0LjM0LDQuMzQsMCwwLDEtLjgxLDIuNTIsMzAuOSwzMC45LDAsMCwxLTQuOCw1LjI2LDMyLjA2LDMyLjA2LDAsMCwxLTUuOSw0LjA5LDI5LjgyLDI5LjgyLDAsMCwxLTQzLjcxLTI2LjQydi0uODhhMzAsMzAsMCwwLDEsNTAuNzgtMjAuNjMsMzEuMTcsMzEuMTcsMCwwLDEsNi41NSw5LjQxQTI4LjkyLDI4LjkyLDAsMCwxLDI4Ny44Niw4NVptLTkuMjktNC4zM2EyMS4wOCwyMS4wOCwwLDAsMC0yLjM5LTUuODRBMjMuODQsMjMuODQsMCwwLDAsMjcyLjMyLDcwLDIyLjI2LDIyLjI2LDAsMCwwLDI2NS42OSw2NmEyMS4wOCwyMS4wOCwwLDAsMC0yMS45NSw0LjE4di0uMDZhMjAuOTQsMjAuOTQsMCwwLDAtNi4zNywxMC42OVoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0zMjIuMjMsNTUuODNhMjQuNDUsMjQuNDUsMCwwLDEsMjQuMzEsMjQuMzF2MzFhNS41OSw1LjU5LDAsMCwxLS4yMywxLjcsMi45LDIuOSwwLDAsMS0uOTQsMS4yOSwzLjg5LDMuODksMCwwLDEtMy4xLDEuMjgsNCw0LDAsMCwxLTMuMTUtMS4zNCw0LjM4LDQuMzgsMCwwLDEtMS4xNy0yLjkzdi0zMUExNS4wOCwxNS4wOCwwLDAsMCwzMzMuMzMsNjlhMTUuOCwxNS44LDAsMCwwLTIyLjIxLDAsMTUuMjEsMTUuMjEsMCwwLDAtNC41NSwxMS4xNnYzMWEzLjczLDMuNzMsMCwwLDEtMS4yMywzLDQuMiw0LjIsMCwwLDEtMy4xNiwxLjI4LDUuMzgsNS4zOCwwLDAsMS0xLjYtLjIzLDMuMDgsMy4wOCwwLDAsMS0xLjM4LTEsMy42NiwzLjY2LDAsMCwxLTEuMjMtM1Y3OS43OWEyNC40NSwyNC40NSwwLDAsMSwyNC4yNi0yNFoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00MTcsODUuMTFhNS4xMSw1LjExLDAsMCwxLDAsLjUyLDIuNDIsMi40MiwwLDAsMS0uMi43MWwuMDYtLjA2YTMuOTMsMy45MywwLDAsMS00LjE1LDMuMTVIMzY2LjM0YTE5Ljc3LDE5Ljc3LDAsMCwwLDIuMDUsNi4yLDIwLjM3LDIwLjM3LDAsMCwwLDQuMTUsNS4zMiwyMCwyMCwwLDAsMCwxNC42MSw2LDIwLjMyLDIwLjMyLDAsMCwwLDUuMDgtLjYyLDI1LjI0LDI1LjI0LDAsMCwwLDQuOC0xLjc4SDM5N2EyMS40NiwyMS40NiwwLDAsMCw0LjE1LTIuODYsMjEsMjEsMCwwLDAsMy40NC0zLjkyLDQuNzMsNC43MywwLDAsMSwyLjkzLTEuODFoLjY0YTQuNTksNC41OSwwLDAsMSwyLjQuNyw0LjEsNC4xLDAsMCwxLDEuOTIsMi44MS42Ni42NiwwLDAsMSwuMDkuNDEsMi43NywyLjc3LDAsMCwwLDAsLjQ2LDQuMjgsNC4yOCwwLDAsMS0uODIsMi41MiwzMC40MywzMC40MywwLDAsMS00Ljc5LDUuMjYsMzIuNCwzMi40LDAsMCwxLTUuOSw0LjA5LDI5LjgxLDI5LjgxLDAsMCwxLTQzLjcxLTI2LjQydi0uODhhMzAsMzAsMCwwLDEsNTAuNzgtMjAuNjMsMzEuMTcsMzEuMTcsMCwwLDEsNi41NSw5LjQxQTI5LjA5LDI5LjA5LDAsMCwxLDQxNyw4NVptLTkuMjktNC4zM2EyMS4xMSwyMS4xMSwwLDAsMC0yLjQtNS44NEEyMy44LDIzLjgsMCwwLDAsNDAxLjQ3LDcwLDIyLjE4LDIyLjE4LDAsMCwwLDM5NC44Myw2NmEyMS4wNiwyMS4wNiwwLDAsMC0yMS45NCw0LjE4di0uMDZhMjAuOTQsMjAuOTQsMCwwLDAtNi4zNywxMC42OVoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00NTksMzIuMjJhNC4yOCw0LjI4LDAsMCwxLDIuODYsMS4xNyw0LjIsNC4yLDAsMCwxLDEuNTgsMy4yMSw0LjI5LDQuMjksMCwwLDEtMS41OCwzLjI4QTQuMjEsNC4yMSwwLDAsMSw0NTksNDEuMWEyMiwyMiwwLDAsMC0yMi4yNywyMi4yMXYuMjNINDU0YTQuMjIsNC4yMiwwLDAsMSwzLjEsMS4yOSw0LjQ2LDQuNDYsMCwwLDEsMS4yMywzLjFBNC4zLDQuMywwLDAsMSw0NTcuMTEsNzFhNC4yMiw0LjIyLDAsMCwxLTMuMSwxLjI5SDQzNi43N3YzOC42M2E0LjE2LDQuMTYsMCwwLDEtMS4yMywzLjE2LDQuMzYsNC4zNiwwLDAsMS0zLjIxLDEuMjgsNC4yNSw0LjI1LDAsMCwxLTMuMS0xLjI4LDQuMzUsNC4zNSwwLDAsMS0xLjM0LTMuMTZWNjIuMzdhMzEuMTEsMzEuMTEsMCwwLDEsMi42LTExLjY4QTMxLjY2LDMxLjY2LDAsMCwxLDQzNy4zLDQxLDMwLjI1LDMwLjI1LDAsMCwxLDQ1OSwzMi4yMloiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00NzguNCw1NC4yNUE1LDUsMCwwLDEsNDgyLDU2LjA2YTcsNywwLDAsMSwuNTIsMS4wNiw0LDQsMCwwLDEsLjI0LDEuNTF2NTIuMzFhNC41Miw0LjUyLDAsMCwxLS4yNCwxLjYxLDQuMjcsNC4yNywwLDAsMS0uNTgsMS4wOCw1LDUsMCwwLDEtMy41NiwxLjc1LDQuMTksNC4xOSwwLDAsMS0zLTEuMzQsMy45MywzLjkzLDAsMCwxLTEuNDEtMy4xVjU4LjYzYTMuODUsMy44NSwwLDAsMSwxLjQxLTNBNC4xNiw0LjE2LDAsMCwxLDQ3OC40LDU0LjI1Wm0uMjMtMTYuODZhNC40NSw0LjQ1LDAsMCwxLDMuMSwxLjE3QTQuNjUsNC42NSwwLDAsMSw0ODMsNDEuNzh2My43NmE0LjQ4LDQuNDgsMCwwLDEtMS4yOCwzLjA5LDQuMTUsNC4xNSwwLDAsMS0zLDEuMjksMy45MiwzLjkyLDAsMCwxLTMuMS0xLjM0LDQuNjQsNC42NCwwLDAsMS0xLTEuNDQsMy43OSwzLjc5LDAsMCwxLS4zNS0xLjZWNDEuNzhhNC4xMiw0LjEyLDAsMCwxLDEuNC0zLjI4di4wNkE0LjExLDQuMTEsMCwwLDEsNDc4LjYzLDM3LjM5WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTUyNy4yOSwxMDYuNTZhNC4yNSw0LjI1LDAsMCwxLDMuMSwxLjM0LDQsNCwwLDAsMSwxLjM0LDMsNC4zNSw0LjM1LDAsMCwxLTEuMzQsMy4xNiw0LjI1LDQuMjUsMCwwLDEtMy4xLDEuMjgsMjkuNzcsMjkuNzcsMCwwLDEtMjEuNjItOC44MiwzMS45MywzMS45MywwLDAsMS02Ljc1LTkuNzMsMzEuNCwzMS40LDAsMCwxLTIuNi0xMS43MlYzNi42YTQuNTQsNC41NCwwLDAsMSwxLjM0LTMuMTUsNC4zMyw0LjMzLDAsMCwxLDMuMS0xLjIzLDQuNSw0LjUsMCwwLDEsMy4xNSwxLjIzLDQuMjUsNC4yNSwwLDAsMSwxLjIzLDMuMTVWNTVoMTcuMThhNC42LDQuNiwwLDAsMSwzLjE2LDEuMzUsNC4xNyw0LjE3LDAsMCwxLDEuMjMsMy4wOSw0LjQ4LDQuNDgsMCwwLDEtMS4yMywzLjIyLDUsNSwwLDAsMS0zLjE2LDEuMTdINTA1LjE0Vjg0LjU4YTIxLjYsMjEuNiwwLDAsMCw2LjU1LDE1LjU1QTIxLjM3LDIxLjM3LDAsMCwwLDUyNy4yOSwxMDYuNTZaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMzE3LjkzLDE1My4xNGEzLjczLDMuNzMsMCwwLDEsMi41NywxLC44NC44NCwwLDAsMSwuMzUuMTIsNCw0LDAsMCwxLDEuNDcsMy4yMXYzMS4yMUEyNC4zMiwyNC4zMiwwLDAsMSwyOTAuNjQsMjEyYTI3LDI3LDAsMCwxLTYuNjYtMy4yNCwzMC4zLDMwLjMsMCwwLDEtMy40Mi0yLjgxLDE5LjQ2LDE5LjQ2LDAsMCwxLTIuODQtMy4zMywyOC4yNiwyOC4yNiwwLDAsMS0yLjg5LDMuMzYsMjIuMTIsMjIuMTIsMCwwLDEtMy4zNiwyLjc4LDI3LjE1LDI3LjE1LDAsMCwxLTYuNjMsMy4yNCwyMy4yNSwyMy4yNSwwLDAsMS03LjI4LDEuMTRBMjQuNDUsMjQuNDUsMCwwLDEsMjMzLjEzLDE4OVYxNTcuNDZhMy43NiwzLjc2LDAsMCwxLDEuMjMtMywyLjkzLDIuOTMsMCwwLDEsMS40My0xLjA2LDUuOTEsNS45MSwwLDAsMSwxLjYxLS4yMyw0LDQsMCwwLDEsMS44NC40MSw0LjcyLDQuNzIsMCwwLDEsMS4zNywxLDMuODUsMy44NSwwLDAsMSwxLjEyLDIuODZ2MzEuMjFhMTUsMTUsMCwwLDAsNC42MSwxMS4xNiwxNS4zLDE1LjMsMCwwLDAsMTEuMjIsNC42OCwxNS43NywxNS43NywwLDAsMCwxNS43OC0xNS44NFYxNTcuNDZhNCw0LDAsMCwxLDEuNDYtMy4yMS41Ny41NywwLDAsMSwuNDEtLjEyLDMuNjgsMy42OCwwLDAsMSwyLjUxLTEsMy44OCwzLjg4LDAsMCwxLDMsMS40LDMuNzcsMy43NywwLDAsMSwuOTQsMS4yNiw0LjI2LDQuMjYsMCwwLDEsLjI5LDEuNjZ2MzEuMjFhMTYuMDcsMTYuMDcsMCwwLDAsMTUuOSwxNS44NCwxNS4yNCwxNS4yNCwwLDAsMCwxMS4xNi00LjY4LDE0Ljk0LDE0Ljk0LDAsMCwwLDQuNjctMTEuMTZWMTU3LjQ2YTQuMzksNC4zOSwwLDAsMSw0LjIxLTQuMzJaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMzYyLjU4LDE1Mi42N2EyNS4wNiwyNS4wNiwwLDAsMSwyNC41NCwyNC42MVYyMDguNmEzLjc5LDMuNzksMCwwLDEtMS4yOCwzLDQuMSw0LjEsMCwwLDEtMy4xLDEuMjksNC4yOCw0LjI4LDAsMCwxLTQuMjYtNC4zM1YxNzcuMjhhMTYsMTYsMCwwLDAtMTUuOS0xNS45LDE2LjA3LDE2LjA3LDAsMCwwLTE1Ljk1LDE1LjlWMjA4LjZhNC4yOSw0LjI5LDAsMCwxLTEuMTIsMyw0LDQsMCwwLDEtMy4yMSwxLjM1LDQuNzUsNC43NSwwLDAsMS0xLjY0LS4zLDMuNTksMy41OSwwLDAsMS0xLjQ2LTEsMy40NSwzLjQ1LDAsMCwxLS45LTEuMzQsNC41LDQuNSwwLDAsMS0uMzItMS43VjEzNGE1LjI2LDUuMjYsMCwwLDEsLjI2LTEuNzIsMywzLDAsMCwxLDEuMDgtMS40NGwtLjEyLjA2YTMuMTksMy4xOSwwLDAsMSwxLjQzLS45Myw1Ljc2LDUuNzYsMCwwLDEsMS42Ny0uMjQsNC4xMiw0LjEyLDAsMCwxLDMuMjEsMS4yOSw0LjQ0LDQuNDQsMCwwLDEsMS4xMiwzdjI0LjU1cS45My0uNzcsMS45Mi0xLjQ0Yy42Ny0uNDQsMS4yNy0uODIsMS44Mi0xLjE0YTI2LjU3LDI2LjU3LDAsMCwxLDUuOTMtMi40NUEyMi45NCwyMi45NCwwLDAsMSwzNjIuNTgsMTUyLjY3WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTQwNy41OSwxNTEuOGE0Ljk0LDQuOTQsMCwwLDEsMy42MiwxLjgxLDYuNDMsNi40MywwLDAsMSwuNTMsMSw0LjMsNC4zLDAsMCwxLC4yMywxLjUydjUyLjNhNC43NCw0Ljc0LDAsMCwxLS4yMywxLjYxLDQuMjksNC4yOSwwLDAsMS0uNTksMS4wOCw1LDUsMCwwLDEtMy41NiwxLjc2LDQuMTksNC4xOSwwLDAsMS0zLTEuMzUsMy45MiwzLjkyLDAsMCwxLTEuNC0zLjF2LTUyLjNhMy44NiwzLjg2LDAsMCwxLDEuNC0zQTQuMTgsNC4xOCwwLDAsMSw0MDcuNTksMTUxLjhabS4yMy0xNy44NmE0LjQ1LDQuNDUsMCwwLDEsMy4xLDEuMTcsNC41OSw0LjU5LDAsMCwxLDEuMjMsMy4yMXY0Ljc2YTQuNDksNC40OSwwLDAsMS0xLjI5LDMuMSw0LjE1LDQuMTUsMCwwLDEtMywxLjI5LDMuODcsMy44NywwLDAsMS0zLjA5LTEuMzUsNC44LDQuOCwwLDAsMS0xLTEuNDMsNCw0LDAsMCwxLS4zNS0xLjYxdi00Ljc2YTQuMTUsNC4xNSwwLDAsMSwxLjQtMy4yN3YuMDZBNC4xMiw0LjEyLDAsMCwxLDQwNy44MiwxMzMuOTRaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNDczLjUzLDIwNC4yMmE0LjM4LDQuMzgsMCwwLDEsMywxLjI4LDMuOTQsMy45NCwwLDAsMSwxLjM1LDMsMy43OCwzLjc4LDAsMCwxLTEuNDEsMy4xNiw0LjI0LDQuMjQsMCwwLDEtMi45MiwxLjIzSDQzMmEzLjkzLDMuOTMsMCwwLDEtMi4zNC0uNzEsNC45Miw0LjkyLDAsMCwxLTEuNTgtMS44Nyw0Ljc5LDQuNzksMCwwLDEtLjQxLTEuODEsNC40LDQuNCwwLDAsMSwuMjQtMS4zNywzLjUxLDMuNTEsMCwwLDEsLjc2LTEuMzJxOC44OC0xMSwxNy43My0yMS44OHQxOC0yMi4yNEg0MzJhNC4yNSw0LjI1LDAsMCwxLTMtMS4yMyw0LjQ1LDQuNDUsMCwwLDEtMS4yOS0zLjA5LDMuODgsMy44OCwwLDAsMSwxLjQ2LTMuMjguMzcuMzcsMCwwLDEsLjI0LS4xMSw0LjA2LDQuMDYsMCwwLDEsMi42My0uOTRoNDEuNTVhNC4xLDQuMSwwLDAsMSwzLjkyLDIuNjkuNDcuNDcsMCwwLDAsMCwuMTgsMS40OSwxLjQ5LDAsMCwxLDAsLjE3bC0uMDUtLjE3YTQuNTQsNC41NCwwLDAsMCwuMjYuODEsMS42NiwxLjY2LDAsMCwxLC4xNC42NSw0LjM3LDQuMzcsMCwwLDEtLjIzLDEuMzcsMy41MiwzLjUyLDAsMCwxLS43NiwxLjMxcS05LDExLTE3Ljc5LDIxLjg2dC0xNy45MiwyMi4yN1oiLz48L2c+PC9nPjwvc3ZnPg==" style="height:34px;width:auto;display:block;" alt="BenefitWhiz"></a>
-  <ul class="nav-links">
+  <a href="#" class="nav-logo"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MzEuNzMgMjEzLjEiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojZmZmO308L3N0eWxlPjwvZGVmcz48dGl0bGU+QldfbG9nb19yZXZlcnNlZDwvdGl0bGU+PGcgaWQ9IkxheWVyXzIiIGRhdGEtbmFtZT0iTGF5ZXIgMiI+PGcgaWQ9IkxheWVyXzEtMiIgZGF0YS1uYW1lPSJMYXllciAxIj48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik02OS43MiwyMDBhNjMsNjMsMCwwLDEtNjMtNjIuOTVWMjlhNS40LDUuNCwwLDEsMSwxMC44LDBWMTM3LjA1QTUyLjIxLDUyLjIxLDAsMCwwLDY5LjcyLDE4OS4yYzI4LjQ4LDAsNTAuNzktMjIuODYsNTAuNzktNTIsMC0xOC04LTMyLjY4LTIyLjIyLTQxLjM1bC42Miw0Ny40MWEyMy44MSwyMy44MSwwLDAsMS04LjIzLDE4LjQ3LDM2LjA5LDM2LjA5LDAsMCwxLTIyLjQyLDguNzgsNS4zMSw1LjMxLDAsMCwxLS44LDBINjYuOGMtMTAuMywwLTE5LjEzLTQuMTgtMjQuODUtMTEuNzZhMjAuNjIsMjAuNjIsMCwwLDEtNC4xMy0xMi4zNlYxMDEuNWE1LjQsNS40LDAsMCwxLDEwLjgsMHY0NC44OGE5Ljc2LDkuNzYsMCwwLDAsMS45NCw1Ljg1LDE4LjIxLDE4LjIxLDAsMCwwLDExLjc1LDcuMDlWOTAuMDdhNS40LDUuNCwwLDAsMSwxMC44LDBWMTU5YTI1LjIzLDI1LjIzLDAsMCwwLDEwLjU0LTUuNDcsMTMsMTMsMCwwLDAsNC40Ni0xMC4xM2wtLjc0LTU2LjA4YTUuNjUsNS42NSwwLDAsMSw3LjcxLTUuMTZjMjIuNjgsOS4zNiwzNi4yMiwyOS45MywzNi4yMiw1NUMxMzEuMywxNzIuNCwxMDQuMjUsMjAwLDY5LjcyLDIwMFpNNjkuNTgsNzAuMDdhNS40NSw1LjQ1LDAsMCwxLTEuNDEtLjE4LDUuNCw1LjQsMCwwLDEtNS40Ni01LjRjMC01MS44MS01NS4wOC01My42NC01Ny40My01My42OUE1LjQsNS40LDAsMCwxLDUuNSwwLDg5LjY3LDg5LjY3LDAsMCwxLDM5LjA5LDguMzdDNTAsMTMuNjEsNjIuMzUsMjIuODYsNjguODgsMzljNi41NS0xNiwxOC44Ni0yNS4yLDI5LjcxLTMwLjQyQTg5LjQ4LDg5LjQ4LDAsMCwxLDEzMi4xOC4xOSw1LjQsNS40LDAsMSwxLDEzMi40LDExaDBDMTMwLjA2LDExLDc1LDEyLjg2LDc1LDY0LjY4QTUuMzksNS4zOSwwLDAsMSw2OS41OCw3MC4wN1pNOTAuNzIsNTcuMzNhNS4zNCw1LjM0LDAsMCwxLTMuODEtMS41OCw1LjM5LDUuMzksMCwwLDEsMC03LjYzbDQuMjUtNC4yNmE1LjQsNS40LDAsMCwxLDcuNjMsNy42NGwtNC4yNSw0LjI1QTUuMzQsNS4zNCwwLDAsMSw5MC43Miw1Ny4zM1ptLTQ1LDBhNS4zNyw1LjM3LDAsMCwxLTMuODItMS41OEwzNy42Myw1MS41YTUuNCw1LjQsMCwwLDEsNy42NC03LjY0bDQuMjUsNC4yNmE1LjQsNS40LDAsMCwxLTMuODIsOS4yMVoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xODguNTksNTUuM2EzMC4xMywzMC4xMywwLDAsMSwzMC4xNSwzMC4xLDMwLDMwLDAsMCwxLTUxLjM3LDIxLjI3LDI4LjUxLDI4LjUxLDAsMCwxLTguODItMjEuMjdWNjAuOTFxMC02LjEzLDAtMTIuMjF0MC0xMi4zM2E0Ljg2LDQuODYsMCwwLDEsLjItMS41OCwzLDMsMCwwLDEsLjU2LTFBNS4yNyw1LjI3LDAsMCwxLDE2MywzMmE1LjM4LDUuMzgsMCwwLDEsMy41NiwxLjc2LDMuMSwzLjEsMCwwLDEsLjYyLDEuMDUsNC45MSw0LjkxLDAsMCwxLC4yLDEuNTJWNjQuMjRhMzUsMzUsMCwwLDEsMi44MS0yLjUxLDM1LjcyLDM1LjcyLDAsMCwxLDMtMi4xNiwzMy4yLDMzLjIsMCwwLDEsNy40OC0zLjE2QTI5LDI5LDAsMCwxLDE4OC41OSw1NS4zWm0wLDUxLjQ5QTIxLjI1LDIxLjI1LDAsMCwwLDIxMCw4NS40YTIwLjYsMjAuNiwwLDAsMC02LjItMTUuMTQsMjAuOTMsMjAuOTMsMCwwLDAtNy00LjdBMjEuNzMsMjEuNzMsMCwwLDAsMTg4LjU5LDY0LDIxLjE1LDIxLjE1LDAsMCwwLDE2Ny4zMSw4NS40YTIxLDIxLDAsMCwwLDYuMTQsMTUuMTRBMjAuNjEsMjAuNjEsMCwwLDAsMTg4LjU5LDEwNi43OVoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yODcuODYsODUuMTFjMCwuMTUsMCwuMzMsMCwuNTJhMi40OCwyLjQ4LDAsMCwxLS4yMS43MWwuMDYtLjA2YTMuOTMsMy45MywwLDAsMS00LjE1LDMuMTVIMjM3LjJhMTkuNzUsMTkuNzUsMCwwLDAsMiw2LjIsMjAuMzcsMjAuMzcsMCwwLDAsNC4xNSw1LjMyLDIwLDIwLDAsMCwwLDE0LjYxLDYsMjAuNDYsMjAuNDYsMCwwLDAsNS4wOS0uNjIsMjUuNDEsMjUuNDEsMCwwLDAsNC43OS0xLjc4aC0uMDZhMjAuOTQsMjAuOTQsMCwwLDAsNy42LTYuNzgsNC42OCw0LjY4LDAsMCwxLDIuOTItMS44MUgyNzlhNC41OSw0LjU5LDAsMCwxLDIuNC43LDQuMTQsNC4xNCwwLDAsMSwxLjkzLDIuODEuNzIuNzIsMCwwLDEsLjA4LjQxLDIuNzcsMi43NywwLDAsMCwwLC40Niw0LjM0LDQuMzQsMCwwLDEtLjgxLDIuNTIsMzAuOSwzMC45LDAsMCwxLTQuOCw1LjI2LDMyLjA2LDMyLjA2LDAsMCwxLTUuOSw0LjA5LDI5LjgyLDI5LjgyLDAsMCwxLTQzLjcxLTI2LjQydi0uODhhMzAsMzAsMCwwLDEsNTAuNzgtMjAuNjMsMzEuMTcsMzEuMTcsMCwwLDEsNi41NSw5LjQxQTI4LjkyLDI4LjkyLDAsMCwxLDI4Ny44Niw4NVptLTkuMjktNC4zM2EyMS4wOCwyMS4wOCwwLDAsMC0yLjM5LTUuODRBMjMuODQsMjMuODQsMCwwLDAsMjcyLjMyLDcwLDIyLjI2LDIyLjI2LDAsMCwwLDI2NS42OSw2NmEyMS4wOCwyMS4wOCwwLDAsMC0yMS45NSw0LjE4di0uMDZhMjAuOTQsMjAuOTQsMCwwLDAtNi4zNywxMC42OVoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0zMjIuMjMsNTUuODNhMjQuNDUsMjQuNDUsMCwwLDEsMjQuMzEsMjQuMzF2MzFhNS41OSw1LjU5LDAsMCwxLS4yMywxLjcsMi45LDIuOSwwLDAsMS0uOTQsMS4yOSwzLjg5LDMuODksMCwwLDEtMy4xLDEuMjgsNCw0LDAsMCwxLTMuMTUtMS4zNCw0LjM4LDQuMzgsMCwwLDEtMS4xNy0yLjkzdi0zMUExNS4wOCwxNS4wOCwwLDAsMCwzMzMuMzMsNjlhMTUuOCwxNS44LDAsMCwwLTIyLjIxLDAsMTUuMjEsMTUuMjEsMCwwLDAtNC41NSwxMS4xNnYzMWEzLjczLDMuNzMsMCwwLDEtMS4yMywzLDQuMiw0LjIsMCwwLDEtMy4xNiwxLjI4LDUuMzgsNS4zOCwwLDAsMS0xLjYtLjIzLDMuMDgsMy4wOCwwLDAsMS0xLjM4LTEsMy42NiwzLjY2LDAsMCwxLTEuMjMtM1Y3OS43OWEyNC40NSwyNC40NSwwLDAsMSwyNC4yNi0yNFoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00MTcsODUuMTFhNS4xMSw1LjExLDAsMCwxLDAsLjUyLDIuNDIsMi40MiwwLDAsMS0uMi43MWwuMDYtLjA2YTMuOTMsMy45MywwLDAsMS00LjE1LDMuMTVIMzY2LjM0YTE5Ljc3LDE5Ljc3LDAsMCwwLDIuMDUsNi4yLDIwLjM3LDIwLjM3LDAsMCwwLDQuMTUsNS4zMiwyMCwyMCwwLDAsMCwxNC42MSw2LDIwLjMyLDIwLjMyLDAsMCwwLDUuMDgtLjYyLDI1LjI0LDI1LjI0LDAsMCwwLDQuOC0xLjc4SDM5N2EyMS40NiwyMS40NiwwLDAsMCw0LjE1LTIuODYsMjEsMjEsMCwwLDAsMy40NC0zLjkyLDQuNzMsNC43MywwLDAsMSwyLjkzLTEuODFoLjY0YTQuNTksNC41OSwwLDAsMSwyLjQuNyw0LjEsNC4xLDAsMCwxLDEuOTIsMi44MS42Ni42NiwwLDAsMSwuMDkuNDEsMi43NywyLjc3LDAsMCwwLDAsLjQ2LDQuMjgsNC4yOCwwLDAsMS0uODIsMi41MiwzMC40MywzMC40MywwLDAsMS00Ljc5LDUuMjYsMzIuNCwzMi40LDAsMCwxLTUuOSw0LjA5LDI5LjgxLDI5LjgxLDAsMCwxLTQzLjcxLTI2LjQydi0uODhhMzAsMzAsMCwwLDEsNTAuNzgtMjAuNjMsMzEuMTcsMzEuMTcsMCwwLDEsNi41NSw5LjQxQTI5LjA5LDI5LjA5LDAsMCwxLDQxNyw4NVptLTkuMjktNC4zM2EyMS4xMSwyMS4xMSwwLDAsMC0yLjQtNS44NEEyMy44LDIzLjgsMCwwLDAsNDAxLjQ3LDcwLDIyLjE4LDIyLjE4LDAsMCwwLDM5NC44Myw2NmEyMS4wNiwyMS4wNiwwLDAsMC0yMS45NCw0LjE4di0uMDZhMjAuOTQsMjAuOTQsMCwwLDAtNi4zNywxMC42OVoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00NTksMzIuMjJhNC4yOCw0LjI4LDAsMCwxLDIuODYsMS4xNyw0LjIsNC4yLDAsMCwxLDEuNTgsMy4yMSw0LjI5LDQuMjksMCwwLDEtMS41OCwzLjI4QTQuMjEsNC4yMSwwLDAsMSw0NTksNDEuMWEyMiwyMiwwLDAsMC0yMi4yNywyMi4yMXYuMjNINDU0YTQuMjIsNC4yMiwwLDAsMSwzLjEsMS4yOSw0LjQ2LDQuNDYsMCwwLDEsMS4yMywzLjFBNC4zLDQuMywwLDAsMSw0NTcuMTEsNzFhNC4yMiw0LjIyLDAsMCwxLTMuMSwxLjI5SDQzNi43N3YzOC42M2E0LjE2LDQuMTYsMCwwLDEtMS4yMywzLjE2LDQuMzYsNC4zNiwwLDAsMS0zLjIxLDEuMjgsNC4yNSw0LjI1LDAsMCwxLTMuMS0xLjI4LDQuMzUsNC4zNSwwLDAsMS0xLjM0LTMuMTZWNjIuMzdhMzEuMTEsMzEuMTEsMCwwLDEsMi42LTExLjY4QTMxLjY2LDMxLjY2LDAsMCwxLDQzNy4zLDQxLDMwLjI1LDMwLjI1LDAsMCwxLDQ1OSwzMi4yMloiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00NzguNCw1NC4yNUE1LDUsMCwwLDEsNDgyLDU2LjA2YTcsNywwLDAsMSwuNTIsMS4wNiw0LDQsMCwwLDEsLjI0LDEuNTF2NTIuMzFhNC41Miw0LjUyLDAsMCwxLS4yNCwxLjYxLDQuMjcsNC4yNywwLDAsMS0uNTgsMS4wOCw1LDUsMCwwLDEtMy41NiwxLjc1LDQuMTksNC4xOSwwLDAsMS0zLTEuMzQsMy45MywzLjkzLDAsMCwxLTEuNDEtMy4xVjU4LjYzYTMuODUsMy44NSwwLDAsMSwxLjQxLTNBNC4xNiw0LjE2LDAsMCwxLDQ3OC40LDU0LjI1Wm0uMjMtMTYuODZhNC40NSw0LjQ1LDAsMCwxLDMuMSwxLjE3QTQuNjUsNC42NSwwLDAsMSw0ODMsNDEuNzh2My43NmE0LjQ4LDQuNDgsMCwwLDEtMS4yOCwzLjA5LDQuMTUsNC4xNSwwLDAsMS0zLDEuMjksMy45MiwzLjkyLDAsMCwxLTMuMS0xLjM0LDQuNjQsNC42NCwwLDAsMS0xLTEuNDQsMy43OSwzLjc5LDAsMCwxLS4zNS0xLjZWNDEuNzhhNC4xMiw0LjEyLDAsMCwxLDEuNC0zLjI4di4wNkE0LjExLDQuMTEsMCwwLDEsNDc4LjYzLDM3LjM5WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTUyNy4yOSwxMDYuNTZhNC4yNSw0LjI1LDAsMCwxLDMuMSwxLjM0LDQsNCwwLDAsMSwxLjM0LDMsNC4zNSw0LjM1LDAsMCwxLTEuMzQsMy4xNiw0LjI1LDQuMjUsMCwwLDEtMy4xLDEuMjgsMjkuNzcsMjkuNzcsMCwwLDEtMjEuNjItOC44MiwzMS45MywzMS45MywwLDAsMS02Ljc1LTkuNzMsMzEuNCwzMS40LDAsMCwxLTIuNi0xMS43MlYzNi42YTQuNTQsNC41NCwwLDAsMSwxLjM0LTMuMTUsNC4zMyw0LjMzLDAsMCwxLDMuMS0xLjIzLDQuNSw0LjUsMCwwLDEsMy4xNSwxLjIzLDQuMjUsNC4yNSwwLDAsMSwxLjIzLDMuMTVWNTVoMTcuMThhNC42LDQuNiwwLDAsMSwzLjE2LDEuMzUsNC4xNyw0LjE3LDAsMCwxLDEuMjMsMy4wOSw0LjQ4LDQuNDgsMCwwLDEtMS4yMywzLjIyLDUsNSwwLDAsMS0zLjE2LDEuMTdINTA1LjE0Vjg0LjU4YTIxLjYsMjEuNiwwLDAsMCw2LjU1LDE1LjU1QTIxLjM3LDIxLjM3LDAsMCwwLDUyNy4yOSwxMDYuNTZaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMzE3LjkzLDE1My4xNGEzLjczLDMuNzMsMCwwLDEsMi41NywxLC44NC44NCwwLDAsMSwuMzUuMTIsNCw0LDAsMCwxLDEuNDcsMy4yMXYzMS4yMUEyNC4zMiwyNC4zMiwwLDAsMSwyOTAuNjQsMjEyYTI3LDI3LDAsMCwxLTYuNjYtMy4yNCwzMC4zLDMwLjMsMCwwLDEtMy40Mi0yLjgxLDE5LjQ2LDE5LjQ2LDAsMCwxLTIuODQtMy4zMywyOC4yNiwyOC4yNiwwLDAsMS0yLjg5LDMuMzYsMjIuMTIsMjIuMTIsMCwwLDEtMy4zNiwyLjc4LDI3LjE1LDI3LjE1LDAsMCwxLTYuNjMsMy4yNCwyMy4yNSwyMy4yNSwwLDAsMS03LjI4LDEuMTRBMjQuNDUsMjQuNDUsMCwwLDEsMjMzLjEzLDE4OVYxNTcuNDZhMy43NiwzLjc2LDAsMCwxLDEuMjMtMywyLjkzLDIuOTMsMCwwLDEsMS40My0xLjA2LDUuOTEsNS45MSwwLDAsMSwxLjYxLS4yMyw0LDQsMCwwLDEsMS44NC40MSw0LjcyLDQuNzIsMCwwLDEsMS4zNywxLDMuODUsMy44NSwwLDAsMSwxLjEyLDIuODZ2MzEuMjFhMTUsMTUsMCwwLDAsNC42MSwxMS4xNiwxNS4zLDE1LjMsMCwwLDAsMTEuMjIsNC42OCwxNS43NywxNS43NywwLDAsMCwxNS43OC0xNS44NFYxNTcuNDZhNCw0LDAsMCwxLDEuNDYtMy4yMS41Ny41NywwLDAsMSwuNDEtLjEyLDMuNjgsMy42OCwwLDAsMSwyLjUxLTEsMy44OCwzLjg4LDAsMCwxLDMsMS40LDMuNzcsMy43NywwLDAsMSwuOTQsMS4yNiw0LjI2LDQuMjYsMCwwLDEsLjI5LDEuNjZ2MzEuMjFhMTYuMDcsMTYuMDcsMCwwLDAsMTUuOSwxNS44NCwxNS4yNCwxNS4yNCwwLDAsMCwxMS4xNi00LjY4LDE0Ljk0LDE0Ljk0LDAsMCwwLDQuNjctMTEuMTZWMTU3LjQ2YTQuMzksNC4zOSwwLDAsMSw0LjIxLTQuMzJaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMzYyLjU4LDE1Mi42N2EyNS4wNiwyNS4wNiwwLDAsMSwyNC41NCwyNC42MVYyMDguNmEzLjc5LDMuNzksMCwwLDEtMS4yOCwzLDQuMSw0LjEsMCwwLDEtMy4xLDEuMjksNC4yOCw0LjI4LDAsMCwxLTQuMjYtNC4zM1YxNzcuMjhhMTYsMTYsMCwwLDAtMTUuOS0xNS45LDE2LjA3LDE2LjA3LDAsMCwwLTE1Ljk1LDE1LjlWMjA4LjZhNC4yOSw0LjI5LDAsMCwxLTEuMTIsMyw0LDQsMCwwLDEtMy4yMSwxLjM1LDQuNzUsNC43NSwwLDAsMS0xLjY0LS4zLDMuNTksMy41OSwwLDAsMS0xLjQ2LTEsMy40NSwzLjQ1LDAsMCwxLS45LTEuMzQsNC41LDQuNSwwLDAsMS0uMzItMS43VjEzNGE1LjI2LDUuMjYsMCwwLDEsLjI2LTEuNzIsMywzLDAsMCwxLDEuMDgtMS40NGwtLjEyLjA2YTMuMTksMy4xOSwwLDAsMSwxLjQzLS45Myw1Ljc2LDUuNzYsMCwwLDEsMS42Ny0uMjQsNC4xMiw0LjEyLDAsMCwxLDMuMjEsMS4yOSw0LjQ0LDQuNDQsMCwwLDEsMS4xMiwzdjI0LjU1cS45My0uNzcsMS45Mi0xLjQ0Yy42Ny0uNDQsMS4yNy0uODIsMS44Mi0xLjE0YTI2LjU3LDI2LjU3LDAsMCwxLDUuOTMtMi40NUEyMi45NCwyMi45NCwwLDAsMSwzNjIuNTgsMTUyLjY3WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTQwNy41OSwxNTEuOGE0Ljk0LDQuOTQsMCwwLDEsMy42MiwxLjgxLDYuNDMsNi40MywwLDAsMSwuNTMsMSw0LjMsNC4zLDAsMCwxLC4yMywxLjUydjUyLjNhNC43NCw0Ljc0LDAsMCwxLS4yMywxLjYxLDQuMjksNC4yOSwwLDAsMS0uNTksMS4wOCw1LDUsMCwwLDEtMy41NiwxLjc2LDQuMTksNC4xOSwwLDAsMS0zLTEuMzUsMy45MiwzLjkyLDAsMCwxLTEuNC0zLjF2LTUyLjNhMy44NiwzLjg2LDAsMCwxLDEuNC0zQTQuMTgsNC4xOCwwLDAsMSw0MDcuNTksMTUxLjhabS4yMy0xNy44NmE0LjQ1LDQuNDUsMCwwLDEsMy4xLDEuMTcsNC41OSw0LjU5LDAsMCwxLDEuMjMsMy4yMXY0Ljc2YTQuNDksNC40OSwwLDAsMS0xLjI5LDMuMSw0LjE1LDQuMTUsMCwwLDEtMywxLjI5LDMuODcsMy44NywwLDAsMS0zLjA5LTEuMzUsNC44LDQuOCwwLDAsMS0xLTEuNDMsNCw0LDAsMCwxLS4zNS0xLjYxdi00Ljc2YTQuMTUsNC4xNSwwLDAsMSwxLjQtMy4yN3YuMDZBNC4xMiw0LjEyLDAsMCwxLDQwNy44MiwxMzMuOTRaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNDczLjUzLDIwNC4yMmE0LjM4LDQuMzgsMCwwLDEsMywxLjI4LDMuOTQsMy45NCwwLDAsMSwxLjM1LDMsMy43OCwzLjc4LDAsMCwxLTEuNDEsMy4xNiw0LjI0LDQuMjQsMCwwLDEtMi45MiwxLjIzSDQzMmEzLjkzLDMuOTMsMCwwLDEtMi4zNC0uNzEsNC45Miw0LjkyLDAsMCwxLTEuNTgtMS44Nyw0Ljc5LDQuNzksMCwwLDEtLjQxLTEuODEsNC40LDQuNCwwLDAsMSwuMjQtMS4zNywzLjUxLDMuNTEsMCwwLDEsLjc2LTEuMzJxOC44OC0xMSwxNy43My0yMS44OHQxOC0yMi4yNEg0MzJhNC4yNSw0LjI1LDAsMCwxLTMtMS4yMyw0LjQ1LDQuNDUsMCwwLDEtMS4yOS0zLjA5LDMuODgsMy44OCwwLDAsMSwxLjQ2LTMuMjguMzcuMzcsMCwwLDEsLjI0LS4xMSw0LjA2LDQuMDYsMCwwLDEsMi42My0uOTRoNDEuNTVhNC4xLDQuMSwwLDAsMSwzLjkyLDIuNjkuNDcuNDcsMCwwLDAsMCwuMTgsMS40OSwxLjQ5LDAsMCwxLDAsLjE3bC0uMDUtLjE3YTQuNTQsNC41NCwwLDAsMCwuMjYuODEsMS42NiwxLjY2LDAsMCwxLC4xNC42NSw0LjM3LDQuMzcsMCwwLDEtLjIzLDEuMzcsMy41MiwzLjUyLDAsMCwxLS43NiwxLjMxcS05LDExLTE3Ljc5LDIxLjg2dC0xNy45MiwyMi4yN1oiLz48L2c+PC9nPjwvc3ZnPg==" style="height:34px;width:auto;display:block;" alt="Benefit Whiz"></a>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#calculator">How much are you losing?</a></li>
     <li><a href="#problems">The Problem</a></li>
     <li><a href="#how">How It Works</a></li>
     <li><a href="#platform">Platform</a></li>
@@ -401,6 +765,7 @@
   </ul>
 </nav>
 
+
 <section class="hero">
   
   <!-- Floating particles -->
@@ -408,16 +773,22 @@
 
   <div class="hero-grid">
     <div>
-      <div class="hero-eyebrow fu"><div class="eyebrow-dot"></div>Launching now &mdash; free for early adopters</div>
-      <h1 class="fu d1">Stop trusting commission statements <span style="color:var(--akaroa);">blindly.</span></h1>
-      <p class="hero-desc fu d2">Benefit Whiz helps insurance brokers upload carrier statements, catch missing or inaccurate payments, track expected vs. actual revenue, and take the guesswork out of internal payouts.</p>
-      <div class="hero-actions fu d3">
+      <div class="hero-eyebrow reveal"><div class="eyebrow-dot"></div>Launching now &mdash; free for early adopters</div>
+      <h1 class="hero-h1 reveal delay-1">
+        <span class="slide-word" style="animation-delay:0.1s">Stop</span>
+        <span class="slide-word" style="animation-delay:0.25s">trusting</span>
+        <span class="slide-word" style="animation-delay:0.4s">commission</span>
+        <span class="slide-word" style="animation-delay:0.55s">statements</span>
+        <span class="slide-word" style="animation-delay:0.7s; color:var(--akaroa);">blindly.</span>
+      </h1>
+      <p class="hero-desc reveal delay-2">Benefit Whiz helps insurance brokers upload carrier statements, catch missing or inaccurate payments, track expected vs. actual revenue, and take the guesswork out of internal payouts.</p>
+      <div class="hero-actions reveal delay-3">
         <a href="#contact" class="btn-primary">Request Early Access</a>
         <a href="#how" class="btn-gold">See How It Works</a>
       </div>
 
     </div>
-    <div class="fu d2 recon-wrap">
+    <div class="recon-wrap reveal reveal-right">
       <div class="recon-card">
         <div class="recon-title">Reconcile Carrier Statements</div>
 
@@ -494,101 +865,98 @@
 
     <!-- Stats row below animation -->
     <div class="hero-stats-row">
-      <div class="hsr-item"><span class="hsr-num">&lt;5 min</span><span class="hsr-label">Average reconciliation time</span></div>
+      <div class="hsr-item"><span class="hsr-num" data-static="&lt;5 min">&lt;5 min</span><span class="hsr-label">Average reconciliation time</span></div>
       <div class="hsr-sep"></div>
-      <div class="hsr-item"><span class="hsr-num">98%</span><span class="hsr-label">Commission match accuracy</span></div>
+      <div class="hsr-item"><span class="hsr-num counter-stat" data-target="98" data-suffix="%">0%</span><span class="hsr-label">Commission match accuracy</span></div>
       <div class="hsr-sep"></div>
-      <div class="hsr-item"><span class="hsr-num">1 tool</span><span class="hsr-label">For all your carrier formats</span></div>
+      <div class="hsr-item"><span class="hsr-num" data-static="1 tool">1 tool</span><span class="hsr-label">For all your carrier formats</span></div>
       <div class="hsr-sep"></div>
-      <div class="hsr-item"><span class="hsr-num">$0 fluff</span><span class="hsr-label">No CRM. No bloat.</span></div>
+      <div class="hsr-item"><span class="hsr-num" data-static="$0 fluff">$0 fluff</span><span class="hsr-label">No CRM. No bloat.</span></div>
     </div>
 
   </div>
 </section>
 
+<!-- REVENUE CALCULATOR -->
+<section class="calc-section" id="calculator">
+  <div class="calc-wrap">
+    <div class="calc-eyebrow reveal">&#128181; Commission Leakage Calculator</div>
+    <h1 class="calc-heading">
+      <span class="slide-left">How much revenue are you</span><br>
+      <em class="slide-right">leaving on the table?</em>
+    </h1>
+    <p class="calc-sub reveal delay-2">Most brokerages lose 1&ndash;3% of annual commissions to errors, missed payments, and manual reconciliation gaps. See what that costs you.</p>
+
+    <div class="calc-card reveal delay-3">
+      <div class="calc-bg-num" id="calc-bg-num">-$40K</div>
+      <div class="calc-label">Annual commission revenue</div>
+      <div class="calc-value-display" id="revenue-display">$2,000,000</div>
+      <input type="range" class="calc-slider" id="revenue-slider"
+        min="100000" max="10000000" step="50000" value="2000000"
+        oninput="updateCalc()">
+      <div class="calc-range-labels">
+        <span>$100K</span>
+        <span>$10M</span>
+      </div>
+    </div>
+
+    <div class="calc-results reveal delay-4">
+      <div class="calc-result-card highlight">
+        <div class="calc-result-icon">&#128181;</div>
+        <div class="calc-result-num" id="leakage-annual">$40,000</div>
+        <div class="calc-result-label">Estimated annual commission leakage at 2%</div>
+      </div>
+      <div class="calc-result-card">
+        <div class="calc-result-icon">&#128197;</div>
+        <div class="calc-result-num" id="leakage-monthly">$3,333</div>
+        <div class="calc-result-label">Estimated monthly commission leakage at 2% going undetected</div>
+      </div>
+      <div class="calc-result-card">
+        <div class="calc-result-icon">&#9203;</div>
+        <div class="calc-result-num" id="time-wasted">3 days</div>
+        <div class="calc-result-label">Estimated time wasted on manual reconciliation per month</div>
+      </div>
+    </div>
+
+    <p class="calc-disclaimer">&#42; Based on industry averages. Actual leakage varies by carrier volume, team size, and reconciliation process.</p>
+
+    <div class="calc-cta">
+      <a href="#contact" class="btn-primary" style="font-size:16px;padding:16px 32px;">Start Recovering Revenue &rarr;</a>
+      <a href="#how" class="btn-gold" style="font-size:16px;padding:16px 32px;">See How It Works</a>
+    </div>
+  </div>
+</section>
 <div class="benefits-stripe">
   <div class="b-item"><div class="b-check">&#10003;</div>Catch missed commissions instantly</div>
   <div class="b-item"><div class="b-check">&#10003;</div>Every carrier format supported</div>
   <div class="b-item"><div class="b-check">&#10003;</div>No CRM. No bloat. Just commission clarity.</div>
 </div>
 
+
+
 <section class="problems" id="problems">
   <div class="container">
-    <div class="pill pill-blue" style="color:var(--aqua-island);background:rgba(160,202,219,0.12);border-color:rgba(160,202,219,0.25);">Where Brokerages Leak Revenue</div>
-    <h2 class="sec-h2 on-dark">Commission reconciliation is broken for most brokerages.</h2>
-    <p class="sec-sub on-dark">Every month your team downloads carrier statements in different formats, manually checks payments, and hopes nothing slipped through. It&rsquo;s tedious, error-prone, and leaves real money on the table.</p>
+    <div class="pill pill-blue reveal" style="color:var(--aqua-island);background:rgba(160,202,219,0.12);border-color:rgba(160,202,219,0.25);">Where Brokerages Leak Revenue</div>
+    <h2 class="sec-h2 on-dark reveal reveal-left">Commission reconciliation is <span id="broken-word">broken</span> for most brokerages.</h2>
+    <div class="spill-container" id="spill-container"></div>
+    <p class="sec-sub on-dark reveal delay-2">Every month your team downloads carrier statements in different formats, manually checks payments, and hopes nothing slipped through. It&rsquo;s tedious, error-prone, and leaves real money on the table.</p>
     <div class="prob-grid">
-      <div class="prob-card"><div class="prob-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#CFC59E" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><div class="prob-title">No single source of truth</div><div class="prob-desc">Commission data lives across emails, downloads, and local spreadsheets &mdash; with no audit trail and no version control.</div></div>
-      <div class="prob-card"><div class="prob-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#CFC59E" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div class="prob-title">Missing commissions go unnoticed</div><div class="prob-desc">Without systematic reconciliation, policies that stop paying quietly disappear. By the time you catch it, months have passed.</div></div>
-      <div class="prob-card"><div class="prob-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#CFC59E" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="prob-title">Teams rely on spreadsheets</div><div class="prob-desc">Copy-paste, VLOOKUPs, and manual review are still the norm. It&rsquo;s fragile, slow, and hard to scale as your book grows.</div></div>
-      <div class="prob-card"><div class="prob-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#CFC59E" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="prob-title">Internal splits are easy to get wrong</div><div class="prob-desc">Once commission is received, figuring out who gets what across producers, account managers, and internal teams can lead to confusion, frustration, and payout mistakes.</div></div>
-      <div class="prob-card"><div class="prob-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#CFC59E" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="prob-title">Forecasting is guesswork</div><div class="prob-desc">You know what got paid, but not always what should have been paid. Projecting recurring revenue confidently is nearly impossible.</div></div>
-      <div class="prob-card"><div class="prob-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#CFC59E" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div><div class="prob-title">Commission data is scattered</div><div class="prob-desc">AMS, CRM, and accounting systems each hold part of the picture, but none truly own commission visibility.</div></div>
+      <div class="prob-card reveal delay-1"><div class="prob-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#CFC59E" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><div class="prob-title">No single source of truth</div><div class="prob-desc">Commission data lives across emails, downloads, and local spreadsheets &mdash; with no audit trail and no version control.</div></div>
+      <div class="prob-card reveal delay-2"><div class="prob-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#CFC59E" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div class="prob-title">Missing commissions go unnoticed</div><div class="prob-desc">Without systematic reconciliation, policies that stop paying quietly disappear. By the time you catch it, months have passed.</div></div>
+      <div class="prob-card reveal delay-3"><div class="prob-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#CFC59E" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="prob-title">Teams rely on spreadsheets</div><div class="prob-desc">Copy-paste, VLOOKUPs, and manual review are still the norm. It&rsquo;s fragile, slow, and hard to scale as your book grows.</div></div>
+      <div class="prob-card reveal delay-1"><div class="prob-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#CFC59E" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="prob-title">Internal splits are easy to get wrong</div><div class="prob-desc">Once commission is received, figuring out who gets what across producers, account managers, and internal teams can lead to confusion, frustration, and payout mistakes.</div></div>
+      <div class="prob-card reveal delay-2"><div class="prob-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#CFC59E" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="prob-title">Forecasting is guesswork</div><div class="prob-desc">You know what got paid, but not always what should have been paid. Projecting recurring revenue confidently is nearly impossible.</div></div>
+      <div class="prob-card reveal delay-3"><div class="prob-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#CFC59E" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div><div class="prob-title">Commission data is scattered</div><div class="prob-desc">AMS, CRM, and accounting systems each hold part of the picture, but none truly own commission visibility.</div></div>
     </div>
   </div>
 </section>
 
 
-<section class="money-section">
-  <div class="container">
-    <div class="money-animation-wrap">
-
-      <!-- LEFT: Text -->
-      <div class="money-text">
-        <div class="pill pill-teal">Why It Matters</div>
-        <h2 class="sec-h2">Stop leaving money on the table.</h2>
-        <p class="sec-sub">Every month, commission errors slip through. BenefitWhiz catches them automatically — putting revenue back where it belongs.</p>
-        <div class="money-stats">
-          <div class="money-stat"><span class="money-stat-num">98%</span><span class="money-stat-label">Match accuracy</span></div>
-          <div class="money-stat"><span class="money-stat-num">&lt;5 min</span><span class="money-stat-label">Per reconciliation</span></div>
-          <div class="money-stat"><span class="money-stat-num">$0</span><span class="money-stat-label">Left unrecovered</span></div>
-        </div>
-      </div>
-
-      <!-- RIGHT: Piggy bank animation -->
-      <div class="money-scene">
-
-        <div class="bill bill-1">
-          <svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="78" height="38" rx="4" fill="rgba(132,187,173,0.15)" stroke="#84BBAD" stroke-width="1.5"/><rect x="6" y="6" width="68" height="28" rx="2" fill="none" stroke="#84BBAD" stroke-width="0.75" opacity="0.5"/><text x="40" y="26" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="16" fill="#84BBAD">$</text></svg>
-        </div>
-        <div class="bill bill-2">
-          <svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="78" height="38" rx="4" fill="rgba(102,91,162,0.15)" stroke="#665BA2" stroke-width="1.5"/><rect x="6" y="6" width="68" height="28" rx="2" fill="none" stroke="#665BA2" stroke-width="0.75" opacity="0.5"/><text x="40" y="26" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="16" fill="#665BA2">$</text></svg>
-        </div>
-        <div class="bill bill-3">
-          <svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="78" height="38" rx="4" fill="rgba(160,202,219,0.15)" stroke="#A0CADB" stroke-width="1.5"/><rect x="6" y="6" width="68" height="28" rx="2" fill="none" stroke="#A0CADB" stroke-width="0.75" opacity="0.5"/><text x="40" y="26" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="16" fill="#A0CADB">$</text></svg>
-        </div>
-        <div class="bill bill-4">
-          <svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="78" height="38" rx="4" fill="rgba(207,197,158,0.15)" stroke="#CFC59E" stroke-width="1.5"/><rect x="6" y="6" width="68" height="28" rx="2" fill="none" stroke="#CFC59E" stroke-width="0.75" opacity="0.5"/><text x="40" y="26" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="16" fill="#CFC59E">$</text></svg>
-        </div>
-
-        <!-- Piggy bank SVG - line icon style matching other icons -->
-        <div class="piggy-wrap">
-          <svg class="piggy-svg" viewBox="0 0 220 220" fill="none" stroke="#665BA2" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-            <g class="coin">
-              <circle cx="82" cy="38" r="26" fill="rgba(102,91,162,0.08)" stroke="#665BA2" stroke-width="5.5"/>
-              <text x="82" y="46" text-anchor="middle" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#665BA2" stroke="none">$</text>
-            </g>
-            <path d="M136 72 C138 56 148 50 156 58 C164 66 158 80 148 82" fill="rgba(102,91,162,0.06)"/>
-            <path d="M108 82 C72 82 42 98 36 122 C30 146 44 170 72 178 C72 178 68 190 68 198 L100 198 L100 182 C104 183 108 183 112 183 L112 198 L144 198 L144 183 C170 176 186 158 186 136 C186 108 162 82 128 82 Q118 82 108 82 Z" fill="rgba(102,91,162,0.06)"/>
-            <rect x="172" y="122" width="34" height="28" rx="14" fill="rgba(102,91,162,0.06)" stroke="#665BA2" stroke-width="5"/>
-            <circle cx="181" cy="136" r="4" fill="#665BA2" stroke="none"/>
-            <circle cx="197" cy="136" r="4" fill="#665BA2" stroke="none"/>
-            <circle cx="158" cy="110" r="7" fill="none" stroke="#665BA2" stroke-width="5"/>
-            <line x1="76" y1="82" x2="102" y2="82" stroke-width="6" stroke-linecap="round"/>
-            <path d="M36 128 C22 126 16 114 22 106 C26 100 34 104 30 112" fill="none" stroke-width="5.5"/>
-          </svg>
-          <div class="piggy-label">Revenue recovered</div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
 
 <section class="how" id="how">
   <div class="container">
-    <div class="pill pill-teal">How It Works</div>
-    <h2 class="sec-h2">A simple workflow built for how brokers actually work.</h2>
+    <div class="pill pill-teal reveal">How It Works</div>
+    <h2 class="sec-h2 reveal reveal-left">A simple workflow built for how brokers actually work.</h2>
     <p style="font-size:17px;color:#4a5165;line-height:1.7;margin:0.5rem 0 2.5rem 0;">From raw carrier statement to reconciled books in minutes.</p>
     <div class="tl-row" id="tl-row">
       <div class="tl-step">
@@ -622,12 +990,12 @@
 
 <section class="caps" id="platform">
   <div class="container">
-    <div class="pill pill-gold">Platform Capabilities</div>
-    <h2 class="sec-h2">Purpose-built tools for commission operations.</h2>
+    <div class="pill pill-gold reveal">Platform Capabilities</div>
+    <h2 class="sec-h2 reveal reveal-left">Purpose-built tools for commission operations.</h2>
     <p class="sec-sub">Not a CRM. Not an AMS. A focused, powerful platform to import, reconcile, track, and distribute commissions &mdash; nothing more, nothing less.</p>
     <div class="caps-grid">
 
-      <div class="cap-card cc-teal">
+      <div class="cap-card cc-teal reveal delay-1">
         <div class="cap-card-top">
           <div class="cap-icon-badge"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#84BBAD" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
           <div class="cap-title">Intelligent Statement Import</div>
@@ -636,7 +1004,7 @@
         <div class="cap-tag tag-ops">Ops Efficiency</div>
       </div>
 
-      <div class="cap-card cc-purple">
+      <div class="cap-card cc-purple reveal delay-2">
         <div class="cap-card-top">
           <div class="cap-icon-badge"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#665BA2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><polyline points="23 20 23 14 17 14"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg></div>
           <div class="cap-title">Automated Reconciliation Engine</div>
@@ -645,7 +1013,7 @@
         <div class="cap-tag tag-rev">Revenue Protection</div>
       </div>
 
-      <div class="cap-card cc-green">
+      <div class="cap-card cc-green reveal delay-3">
         <div class="cap-card-top">
           <div class="cap-icon-badge"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3B4F57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
           <div class="cap-title">Transaction Explorer</div>
@@ -654,7 +1022,7 @@
         <div class="cap-tag tag-fin">Finance Visibility</div>
       </div>
 
-      <div class="cap-card cc-gold">
+      <div class="cap-card cc-gold reveal delay-4">
         <div class="cap-card-top">
           <div class="cap-icon-badge"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CFC59E" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
           <div class="cap-title">Payout Distribution Control</div>
@@ -666,16 +1034,46 @@
     </div>
   </div>
 </section>
+<!-- BEFORE / AFTER TOGGLE -->
+<section class="ba-section">
+  <div class="container">
+    <div class="pill pill-purple">Before &amp; After</div>
+    <h2 class="sec-h2 reveal reveal-left">See the difference Benefit Whiz makes.</h2>
+    <p class="sec-sub">Toggle between the manual process most brokerages still use and what Benefit Whiz does automatically.</p>
+    <div class="ba-toggle-wrap reveal">
+      <button class="ba-btn active" id="ba-before" onclick="showBefore()">&#128197; Without Benefit Whiz</button>
+      <button class="ba-btn" id="ba-after" onclick="showAfter()">&#9889; With Benefit Whiz</button>
+    </div>
+    <div class="ba-cards reveal delay-2">
+      <div class="ba-card" id="ba-card-before">
+        <div class="ba-row"><div class="ba-icon ba-red">&#10005;</div><div class="ba-text"><strong>Download carrier statements manually</strong><span>Different formats, different columns, every month</span></div></div>
+        <div class="ba-row"><div class="ba-icon ba-red">&#10005;</div><div class="ba-text"><strong>Reformat in Excel</strong><span>Hours of copy-paste, VLOOKUPs, and cleanup</span></div></div>
+        <div class="ba-row"><div class="ba-icon ba-red">&#10005;</div><div class="ba-text"><strong>Manually check each policy</strong><span>Easy to miss errors when volume is high</span></div></div>
+        <div class="ba-row"><div class="ba-icon ba-red">&#10005;</div><div class="ba-text"><strong>Calculate producer splits by hand</strong><span>Manual errors create payout disputes every cycle</span></div></div>
+        <div class="ba-row"><div class="ba-icon ba-red">&#10005;</div><div class="ba-text"><strong>Hope nothing slipped through</strong><span>Months pass before missing commissions are caught</span></div></div>
+        <div class="ba-time">&#9203; Average time: <strong>3&ndash;5 days per month</strong></div>
+      </div>
+      <div class="ba-card hidden" id="ba-card-after">
+        <div class="ba-row"><div class="ba-icon ba-green">&#10003;</div><div class="ba-text"><strong>Upload any carrier format</strong><span>CSV, Excel or PDF — auto-normalized instantly</span></div></div>
+        <div class="ba-row"><div class="ba-icon ba-green">&#10003;</div><div class="ba-text"><strong>Automatic reconciliation</strong><span>98% match rate on first pass, no manual cleanup</span></div></div>
+        <div class="ba-row"><div class="ba-icon ba-green">&#10003;</div><div class="ba-text"><strong>Gaps flagged instantly</strong><span>Missing or incorrect payments surfaced in real time</span></div></div>
+        <div class="ba-row"><div class="ba-icon ba-green">&#10003;</div><div class="ba-text"><strong>Automated payout distribution</strong><span>Split rules defined once, applied consistently every cycle</span></div></div>
+        <div class="ba-row"><div class="ba-icon ba-green">&#10003;</div><div class="ba-text"><strong>Full audit trail</strong><span>Every transaction tracked, every discrepancy documented</span></div></div>
+        <div class="ba-time">&#9203; Average time: <strong>&lt;5 minutes per month</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="who" id="who" style="position:relative;overflow:hidden;">
   <div class="container">
-    <div class="pill pill-purple">Who It&rsquo;s For</div>
-    <h2 class="sec-h2">Built for teams that take commission accuracy seriously.</h2>
+    <div class="pill pill-purple reveal">Who It&rsquo;s For</div>
+    <h2 class="sec-h2 reveal reveal-left">Built for teams that take commission accuracy seriously.</h2>
     <p class="sec-sub">Designed for the people who handle statements and resolve discrepancies across carriers, agencies, and internal distributions.</p>
     <div class="who-grid">
-      <div class="who-card"><div class="who-icon" style="background:rgba(102,91,162,0.1);"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#665BA2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="who-title">Insurance Brokers</div><ul class="who-list"><li>Producers managing multiple carriers</li><li>Books with advanced commission splits</li><li>Teams tired of chasing missing payments</li></ul></div>
-      <div class="who-card"><div class="who-icon" style="background:rgba(84,115,184,0.1);"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#5473B8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 8h4"/><path d="M7 12h8"/></svg></div><div class="who-title">Agency Operations Leaders</div><ul class="who-list"><li>Ops managers overseeing commission workflows</li><li>Leaders replacing manual reconciliation processes</li><li>Teams preparing for audits or reviews</li></ul></div>
-      <div class="who-card"><div class="who-icon" style="background:rgba(132,187,173,0.1);"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#84BBAD" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div><div class="who-title">Commission &amp; Accounting Teams</div><ul class="who-list"><li>Staff processing monthly carrier statements</li><li>Finance teams validating recurring revenue and P&amp;L</li><li>Teams handling internal payout distributions</li></ul></div>
+      <div class="who-card reveal delay-1"><div class="who-icon" style="background:rgba(102,91,162,0.1);"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#665BA2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="who-title">Insurance Brokers</div><ul class="who-list"><li>Producers managing multiple carriers</li><li>Books with advanced commission splits</li><li>Teams tired of chasing missing payments</li></ul></div>
+      <div class="who-card reveal delay-2"><div class="who-icon" style="background:rgba(84,115,184,0.1);"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#5473B8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 8h4"/><path d="M7 12h8"/></svg></div><div class="who-title">Agency Operations Leaders</div><ul class="who-list"><li>Ops managers overseeing commission workflows</li><li>Leaders replacing manual reconciliation processes</li><li>Teams preparing for audits or reviews</li></ul></div>
+      <div class="who-card reveal delay-3"><div class="who-icon" style="background:rgba(132,187,173,0.1);"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#84BBAD" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div><div class="who-title">Commission &amp; Accounting Teams</div><ul class="who-list"><li>Staff processing monthly carrier statements</li><li>Finance teams validating recurring revenue and P&amp;L</li><li>Teams handling internal payout distributions</li></ul></div>
     </div>
   </div>
 </section>
@@ -684,8 +1082,8 @@
   <div class="container">
     <div class="cta-inner">
       <div class="pill" style="color:var(--aqua-island);background:rgba(160,202,219,0.12);border:1px solid rgba(160,202,219,0.25);">Free Early Access</div>
-      <h2 class="sec-h2 on-dark">Ready to stop guessing what you&rsquo;re owed?</h2>
-      <p class="sec-sub on-dark">BenefitWhiz is free to get started. Available to a select group of independent brokerages &mdash; your first reconciliation run is guided hands-on by our team. No credit card required.</p>
+      <h2 class="sec-h2 on-dark reveal reveal-left">Ready to stop guessing what you&rsquo;re owed?</h2>
+      <p class="sec-sub on-dark">Benefit Whiz is free to get started. Available to a select group of independent brokerages &mdash; your first reconciliation run is guided hands-on by our team. No credit card required.</p>
       <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="cta-form">
         <input type="hidden" name="form-name" value="contact">
         <p style="display:none;"><input name="bot-field"></p>
@@ -700,11 +1098,11 @@
 </section>
 
 <footer>
-  <div class="footer-logo"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MzEuNzMgMjEzLjEiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojZmZmO308L3N0eWxlPjwvZGVmcz48dGl0bGU+QldfbG9nb19yZXZlcnNlZDwvdGl0bGU+PGcgaWQ9IkxheWVyXzIiIGRhdGEtbmFtZT0iTGF5ZXIgMiI+PGcgaWQ9IkxheWVyXzEtMiIgZGF0YS1uYW1lPSJMYXllciAxIj48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik02OS43MiwyMDBhNjMsNjMsMCwwLDEtNjMtNjIuOTVWMjlhNS40LDUuNCwwLDEsMSwxMC44LDBWMTM3LjA1QTUyLjIxLDUyLjIxLDAsMCwwLDY5LjcyLDE4OS4yYzI4LjQ4LDAsNTAuNzktMjIuODYsNTAuNzktNTIsMC0xOC04LTMyLjY4LTIyLjIyLTQxLjM1bC42Miw0Ny40MWEyMy44MSwyMy44MSwwLDAsMS04LjIzLDE4LjQ3LDM2LjA5LDM2LjA5LDAsMCwxLTIyLjQyLDguNzgsNS4zMSw1LjMxLDAsMCwxLS44LDBINjYuOGMtMTAuMywwLTE5LjEzLTQuMTgtMjQuODUtMTEuNzZhMjAuNjIsMjAuNjIsMCwwLDEtNC4xMy0xMi4zNlYxMDEuNWE1LjQsNS40LDAsMCwxLDEwLjgsMHY0NC44OGE5Ljc2LDkuNzYsMCwwLDAsMS45NCw1Ljg1LDE4LjIxLDE4LjIxLDAsMCwwLDExLjc1LDcuMDlWOTAuMDdhNS40LDUuNCwwLDAsMSwxMC44LDBWMTU5YTI1LjIzLDI1LjIzLDAsMCwwLDEwLjU0LTUuNDcsMTMsMTMsMCwwLDAsNC40Ni0xMC4xM2wtLjc0LTU2LjA4YTUuNjUsNS42NSwwLDAsMSw3LjcxLTUuMTZjMjIuNjgsOS4zNiwzNi4yMiwyOS45MywzNi4yMiw1NUMxMzEuMywxNzIuNCwxMDQuMjUsMjAwLDY5LjcyLDIwMFpNNjkuNTgsNzAuMDdhNS40NSw1LjQ1LDAsMCwxLTEuNDEtLjE4LDUuNCw1LjQsMCwwLDEtNS40Ni01LjRjMC01MS44MS01NS4wOC01My42NC01Ny40My01My42OUE1LjQsNS40LDAsMCwxLDUuNSwwLDg5LjY3LDg5LjY3LDAsMCwxLDM5LjA5LDguMzdDNTAsMTMuNjEsNjIuMzUsMjIuODYsNjguODgsMzljNi41NS0xNiwxOC44Ni0yNS4yLDI5LjcxLTMwLjQyQTg5LjQ4LDg5LjQ4LDAsMCwxLDEzMi4xOC4xOSw1LjQsNS40LDAsMSwxLDEzMi40LDExaDBDMTMwLjA2LDExLDc1LDEyLjg2LDc1LDY0LjY4QTUuMzksNS4zOSwwLDAsMSw2OS41OCw3MC4wN1pNOTAuNzIsNTcuMzNhNS4zNCw1LjM0LDAsMCwxLTMuODEtMS41OCw1LjM5LDUuMzksMCwwLDEsMC03LjYzbDQuMjUtNC4yNmE1LjQsNS40LDAsMCwxLDcuNjMsNy42NGwtNC4yNSw0LjI1QTUuMzQsNS4zNCwwLDAsMSw5MC43Miw1Ny4zM1ptLTQ1LDBhNS4zNyw1LjM3LDAsMCwxLTMuODItMS41OEwzNy42Myw1MS41YTUuNCw1LjQsMCwwLDEsNy42NC03LjY0bDQuMjUsNC4yNmE1LjQsNS40LDAsMCwxLTMuODIsOS4yMVoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xODguNTksNTUuM2EzMC4xMywzMC4xMywwLDAsMSwzMC4xNSwzMC4xLDMwLDMwLDAsMCwxLTUxLjM3LDIxLjI3LDI4LjUxLDI4LjUxLDAsMCwxLTguODItMjEuMjdWNjAuOTFxMC02LjEzLDAtMTIuMjF0MC0xMi4zM2E0Ljg2LDQuODYsMCwwLDEsLjItMS41OCwzLDMsMCwwLDEsLjU2LTFBNS4yNyw1LjI3LDAsMCwxLDE2MywzMmE1LjM4LDUuMzgsMCwwLDEsMy41NiwxLjc2LDMuMSwzLjEsMCwwLDEsLjYyLDEuMDUsNC45MSw0LjkxLDAsMCwxLC4yLDEuNTJWNjQuMjRhMzUsMzUsMCwwLDEsMi44MS0yLjUxLDM1LjcyLDM1LjcyLDAsMCwxLDMtMi4xNiwzMy4yLDMzLjIsMCwwLDEsNy40OC0zLjE2QTI5LDI5LDAsMCwxLDE4OC41OSw1NS4zWm0wLDUxLjQ5QTIxLjI1LDIxLjI1LDAsMCwwLDIxMCw4NS40YTIwLjYsMjAuNiwwLDAsMC02LjItMTUuMTQsMjAuOTMsMjAuOTMsMCwwLDAtNy00LjdBMjEuNzMsMjEuNzMsMCwwLDAsMTg4LjU5LDY0LDIxLjE1LDIxLjE1LDAsMCwwLDE2Ny4zMSw4NS40YTIxLDIxLDAsMCwwLDYuMTQsMTUuMTRBMjAuNjEsMjAuNjEsMCwwLDAsMTg4LjU5LDEwNi43OVoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yODcuODYsODUuMTFjMCwuMTUsMCwuMzMsMCwuNTJhMi40OCwyLjQ4LDAsMCwxLS4yMS43MWwuMDYtLjA2YTMuOTMsMy45MywwLDAsMS00LjE1LDMuMTVIMjM3LjJhMTkuNzUsMTkuNzUsMCwwLDAsMiw2LjIsMjAuMzcsMjAuMzcsMCwwLDAsNC4xNSw1LjMyLDIwLDIwLDAsMCwwLDE0LjYxLDYsMjAuNDYsMjAuNDYsMCwwLDAsNS4wOS0uNjIsMjUuNDEsMjUuNDEsMCwwLDAsNC43OS0xLjc4aC0uMDZhMjAuOTQsMjAuOTQsMCwwLDAsNy42LTYuNzgsNC42OCw0LjY4LDAsMCwxLDIuOTItMS44MUgyNzlhNC41OSw0LjU5LDAsMCwxLDIuNC43LDQuMTQsNC4xNCwwLDAsMSwxLjkzLDIuODEuNzIuNzIsMCwwLDEsLjA4LjQxLDIuNzcsMi43NywwLDAsMCwwLC40Niw0LjM0LDQuMzQsMCwwLDEtLjgxLDIuNTIsMzAuOSwzMC45LDAsMCwxLTQuOCw1LjI2LDMyLjA2LDMyLjA2LDAsMCwxLTUuOSw0LjA5LDI5LjgyLDI5LjgyLDAsMCwxLTQzLjcxLTI2LjQydi0uODhhMzAsMzAsMCwwLDEsNTAuNzgtMjAuNjMsMzEuMTcsMzEuMTcsMCwwLDEsNi41NSw5LjQxQTI4LjkyLDI4LjkyLDAsMCwxLDI4Ny44Niw4NVptLTkuMjktNC4zM2EyMS4wOCwyMS4wOCwwLDAsMC0yLjM5LTUuODRBMjMuODQsMjMuODQsMCwwLDAsMjcyLjMyLDcwLDIyLjI2LDIyLjI2LDAsMCwwLDI2NS42OSw2NmEyMS4wOCwyMS4wOCwwLDAsMC0yMS45NSw0LjE4di0uMDZhMjAuOTQsMjAuOTQsMCwwLDAtNi4zNywxMC42OVoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0zMjIuMjMsNTUuODNhMjQuNDUsMjQuNDUsMCwwLDEsMjQuMzEsMjQuMzF2MzFhNS41OSw1LjU5LDAsMCwxLS4yMywxLjcsMi45LDIuOSwwLDAsMS0uOTQsMS4yOSwzLjg5LDMuODksMCwwLDEtMy4xLDEuMjgsNCw0LDAsMCwxLTMuMTUtMS4zNCw0LjM4LDQuMzgsMCwwLDEtMS4xNy0yLjkzdi0zMUExNS4wOCwxNS4wOCwwLDAsMCwzMzMuMzMsNjlhMTUuOCwxNS44LDAsMCwwLTIyLjIxLDAsMTUuMjEsMTUuMjEsMCwwLDAtNC41NSwxMS4xNnYzMWEzLjczLDMuNzMsMCwwLDEtMS4yMywzLDQuMiw0LjIsMCwwLDEtMy4xNiwxLjI4LDUuMzgsNS4zOCwwLDAsMS0xLjYtLjIzLDMuMDgsMy4wOCwwLDAsMS0xLjM4LTEsMy42NiwzLjY2LDAsMCwxLTEuMjMtM1Y3OS43OWEyNC40NSwyNC40NSwwLDAsMSwyNC4yNi0yNFoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00MTcsODUuMTFhNS4xMSw1LjExLDAsMCwxLDAsLjUyLDIuNDIsMi40MiwwLDAsMS0uMi43MWwuMDYtLjA2YTMuOTMsMy45MywwLDAsMS00LjE1LDMuMTVIMzY2LjM0YTE5Ljc3LDE5Ljc3LDAsMCwwLDIuMDUsNi4yLDIwLjM3LDIwLjM3LDAsMCwwLDQuMTUsNS4zMiwyMCwyMCwwLDAsMCwxNC42MSw2LDIwLjMyLDIwLjMyLDAsMCwwLDUuMDgtLjYyLDI1LjI0LDI1LjI0LDAsMCwwLDQuOC0xLjc4SDM5N2EyMS40NiwyMS40NiwwLDAsMCw0LjE1LTIuODYsMjEsMjEsMCwwLDAsMy40NC0zLjkyLDQuNzMsNC43MywwLDAsMSwyLjkzLTEuODFoLjY0YTQuNTksNC41OSwwLDAsMSwyLjQuNyw0LjEsNC4xLDAsMCwxLDEuOTIsMi44MS42Ni42NiwwLDAsMSwuMDkuNDEsMi43NywyLjc3LDAsMCwwLDAsLjQ2LDQuMjgsNC4yOCwwLDAsMS0uODIsMi41MiwzMC40MywzMC40MywwLDAsMS00Ljc5LDUuMjYsMzIuNCwzMi40LDAsMCwxLTUuOSw0LjA5LDI5LjgxLDI5LjgxLDAsMCwxLTQzLjcxLTI2LjQydi0uODhhMzAsMzAsMCwwLDEsNTAuNzgtMjAuNjMsMzEuMTcsMzEuMTcsMCwwLDEsNi41NSw5LjQxQTI5LjA5LDI5LjA5LDAsMCwxLDQxNyw4NVptLTkuMjktNC4zM2EyMS4xMSwyMS4xMSwwLDAsMC0yLjQtNS44NEEyMy44LDIzLjgsMCwwLDAsNDAxLjQ3LDcwLDIyLjE4LDIyLjE4LDAsMCwwLDM5NC44Myw2NmEyMS4wNiwyMS4wNiwwLDAsMC0yMS45NCw0LjE4di0uMDZhMjAuOTQsMjAuOTQsMCwwLDAtNi4zNywxMC42OVoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00NTksMzIuMjJhNC4yOCw0LjI4LDAsMCwxLDIuODYsMS4xNyw0LjIsNC4yLDAsMCwxLDEuNTgsMy4yMSw0LjI5LDQuMjksMCwwLDEtMS41OCwzLjI4QTQuMjEsNC4yMSwwLDAsMSw0NTksNDEuMWEyMiwyMiwwLDAsMC0yMi4yNywyMi4yMXYuMjNINDU0YTQuMjIsNC4yMiwwLDAsMSwzLjEsMS4yOSw0LjQ2LDQuNDYsMCwwLDEsMS4yMywzLjFBNC4zLDQuMywwLDAsMSw0NTcuMTEsNzFhNC4yMiw0LjIyLDAsMCwxLTMuMSwxLjI5SDQzNi43N3YzOC42M2E0LjE2LDQuMTYsMCwwLDEtMS4yMywzLjE2LDQuMzYsNC4zNiwwLDAsMS0zLjIxLDEuMjgsNC4yNSw0LjI1LDAsMCwxLTMuMS0xLjI4LDQuMzUsNC4zNSwwLDAsMS0xLjM0LTMuMTZWNjIuMzdhMzEuMTEsMzEuMTEsMCwwLDEsMi42LTExLjY4QTMxLjY2LDMxLjY2LDAsMCwxLDQzNy4zLDQxLDMwLjI1LDMwLjI1LDAsMCwxLDQ1OSwzMi4yMloiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00NzguNCw1NC4yNUE1LDUsMCwwLDEsNDgyLDU2LjA2YTcsNywwLDAsMSwuNTIsMS4wNiw0LDQsMCwwLDEsLjI0LDEuNTF2NTIuMzFhNC41Miw0LjUyLDAsMCwxLS4yNCwxLjYxLDQuMjcsNC4yNywwLDAsMS0uNTgsMS4wOCw1LDUsMCwwLDEtMy41NiwxLjc1LDQuMTksNC4xOSwwLDAsMS0zLTEuMzQsMy45MywzLjkzLDAsMCwxLTEuNDEtMy4xVjU4LjYzYTMuODUsMy44NSwwLDAsMSwxLjQxLTNBNC4xNiw0LjE2LDAsMCwxLDQ3OC40LDU0LjI1Wm0uMjMtMTYuODZhNC40NSw0LjQ1LDAsMCwxLDMuMSwxLjE3QTQuNjUsNC42NSwwLDAsMSw0ODMsNDEuNzh2My43NmE0LjQ4LDQuNDgsMCwwLDEtMS4yOCwzLjA5LDQuMTUsNC4xNSwwLDAsMS0zLDEuMjksMy45MiwzLjkyLDAsMCwxLTMuMS0xLjM0LDQuNjQsNC42NCwwLDAsMS0xLTEuNDQsMy43OSwzLjc5LDAsMCwxLS4zNS0xLjZWNDEuNzhhNC4xMiw0LjEyLDAsMCwxLDEuNC0zLjI4di4wNkE0LjExLDQuMTEsMCwwLDEsNDc4LjYzLDM3LjM5WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTUyNy4yOSwxMDYuNTZhNC4yNSw0LjI1LDAsMCwxLDMuMSwxLjM0LDQsNCwwLDAsMSwxLjM0LDMsNC4zNSw0LjM1LDAsMCwxLTEuMzQsMy4xNiw0LjI1LDQuMjUsMCwwLDEtMy4xLDEuMjgsMjkuNzcsMjkuNzcsMCwwLDEtMjEuNjItOC44MiwzMS45MywzMS45MywwLDAsMS02Ljc1LTkuNzMsMzEuNCwzMS40LDAsMCwxLTIuNi0xMS43MlYzNi42YTQuNTQsNC41NCwwLDAsMSwxLjM0LTMuMTUsNC4zMyw0LjMzLDAsMCwxLDMuMS0xLjIzLDQuNSw0LjUsMCwwLDEsMy4xNSwxLjIzLDQuMjUsNC4yNSwwLDAsMSwxLjIzLDMuMTVWNTVoMTcuMThhNC42LDQuNiwwLDAsMSwzLjE2LDEuMzUsNC4xNyw0LjE3LDAsMCwxLDEuMjMsMy4wOSw0LjQ4LDQuNDgsMCwwLDEtMS4yMywzLjIyLDUsNSwwLDAsMS0zLjE2LDEuMTdINTA1LjE0Vjg0LjU4YTIxLjYsMjEuNiwwLDAsMCw2LjU1LDE1LjU1QTIxLjM3LDIxLjM3LDAsMCwwLDUyNy4yOSwxMDYuNTZaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMzE3LjkzLDE1My4xNGEzLjczLDMuNzMsMCwwLDEsMi41NywxLC44NC44NCwwLDAsMSwuMzUuMTIsNCw0LDAsMCwxLDEuNDcsMy4yMXYzMS4yMUEyNC4zMiwyNC4zMiwwLDAsMSwyOTAuNjQsMjEyYTI3LDI3LDAsMCwxLTYuNjYtMy4yNCwzMC4zLDMwLjMsMCwwLDEtMy40Mi0yLjgxLDE5LjQ2LDE5LjQ2LDAsMCwxLTIuODQtMy4zMywyOC4yNiwyOC4yNiwwLDAsMS0yLjg5LDMuMzYsMjIuMTIsMjIuMTIsMCwwLDEtMy4zNiwyLjc4LDI3LjE1LDI3LjE1LDAsMCwxLTYuNjMsMy4yNCwyMy4yNSwyMy4yNSwwLDAsMS03LjI4LDEuMTRBMjQuNDUsMjQuNDUsMCwwLDEsMjMzLjEzLDE4OVYxNTcuNDZhMy43NiwzLjc2LDAsMCwxLDEuMjMtMywyLjkzLDIuOTMsMCwwLDEsMS40My0xLjA2LDUuOTEsNS45MSwwLDAsMSwxLjYxLS4yMyw0LDQsMCwwLDEsMS44NC40MSw0LjcyLDQuNzIsMCwwLDEsMS4zNywxLDMuODUsMy44NSwwLDAsMSwxLjEyLDIuODZ2MzEuMjFhMTUsMTUsMCwwLDAsNC42MSwxMS4xNiwxNS4zLDE1LjMsMCwwLDAsMTEuMjIsNC42OCwxNS43NywxNS43NywwLDAsMCwxNS43OC0xNS44NFYxNTcuNDZhNCw0LDAsMCwxLDEuNDYtMy4yMS41Ny41NywwLDAsMSwuNDEtLjEyLDMuNjgsMy42OCwwLDAsMSwyLjUxLTEsMy44OCwzLjg4LDAsMCwxLDMsMS40LDMuNzcsMy43NywwLDAsMSwuOTQsMS4yNiw0LjI2LDQuMjYsMCwwLDEsLjI5LDEuNjZ2MzEuMjFhMTYuMDcsMTYuMDcsMCwwLDAsMTUuOSwxNS44NCwxNS4yNCwxNS4yNCwwLDAsMCwxMS4xNi00LjY4LDE0Ljk0LDE0Ljk0LDAsMCwwLDQuNjctMTEuMTZWMTU3LjQ2YTQuMzksNC4zOSwwLDAsMSw0LjIxLTQuMzJaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMzYyLjU4LDE1Mi42N2EyNS4wNiwyNS4wNiwwLDAsMSwyNC41NCwyNC42MVYyMDguNmEzLjc5LDMuNzksMCwwLDEtMS4yOCwzLDQuMSw0LjEsMCwwLDEtMy4xLDEuMjksNC4yOCw0LjI4LDAsMCwxLTQuMjYtNC4zM1YxNzcuMjhhMTYsMTYsMCwwLDAtMTUuOS0xNS45LDE2LjA3LDE2LjA3LDAsMCwwLTE1Ljk1LDE1LjlWMjA4LjZhNC4yOSw0LjI5LDAsMCwxLTEuMTIsMyw0LDQsMCwwLDEtMy4yMSwxLjM1LDQuNzUsNC43NSwwLDAsMS0xLjY0LS4zLDMuNTksMy41OSwwLDAsMS0xLjQ2LTEsMy40NSwzLjQ1LDAsMCwxLS45LTEuMzQsNC41LDQuNSwwLDAsMS0uMzItMS43VjEzNGE1LjI2LDUuMjYsMCwwLDEsLjI2LTEuNzIsMywzLDAsMCwxLDEuMDgtMS40NGwtLjEyLjA2YTMuMTksMy4xOSwwLDAsMSwxLjQzLS45Myw1Ljc2LDUuNzYsMCwwLDEsMS42Ny0uMjQsNC4xMiw0LjEyLDAsMCwxLDMuMjEsMS4yOSw0LjQ0LDQuNDQsMCwwLDEsMS4xMiwzdjI0LjU1cS45My0uNzcsMS45Mi0xLjQ0Yy42Ny0uNDQsMS4yNy0uODIsMS44Mi0xLjE0YTI2LjU3LDI2LjU3LDAsMCwxLDUuOTMtMi40NUEyMi45NCwyMi45NCwwLDAsMSwzNjIuNTgsMTUyLjY3WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTQwNy41OSwxNTEuOGE0Ljk0LDQuOTQsMCwwLDEsMy42MiwxLjgxLDYuNDMsNi40MywwLDAsMSwuNTMsMSw0LjMsNC4zLDAsMCwxLC4yMywxLjUydjUyLjNhNC43NCw0Ljc0LDAsMCwxLS4yMywxLjYxLDQuMjksNC4yOSwwLDAsMS0uNTksMS4wOCw1LDUsMCwwLDEtMy41NiwxLjc2LDQuMTksNC4xOSwwLDAsMS0zLTEuMzUsMy45MiwzLjkyLDAsMCwxLTEuNC0zLjF2LTUyLjNhMy44NiwzLjg2LDAsMCwxLDEuNC0zQTQuMTgsNC4xOCwwLDAsMSw0MDcuNTksMTUxLjhabS4yMy0xNy44NmE0LjQ1LDQuNDUsMCwwLDEsMy4xLDEuMTcsNC41OSw0LjU5LDAsMCwxLDEuMjMsMy4yMXY0Ljc2YTQuNDksNC40OSwwLDAsMS0xLjI5LDMuMSw0LjE1LDQuMTUsMCwwLDEtMywxLjI5LDMuODcsMy44NywwLDAsMS0zLjA5LTEuMzUsNC44LDQuOCwwLDAsMS0xLTEuNDMsNCw0LDAsMCwxLS4zNS0xLjYxdi00Ljc2YTQuMTUsNC4xNSwwLDAsMSwxLjQtMy4yN3YuMDZBNC4xMiw0LjEyLDAsMCwxLDQwNy44MiwxMzMuOTRaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNDczLjUzLDIwNC4yMmE0LjM4LDQuMzgsMCwwLDEsMywxLjI4LDMuOTQsMy45NCwwLDAsMSwxLjM1LDMsMy43OCwzLjc4LDAsMCwxLTEuNDEsMy4xNiw0LjI0LDQuMjQsMCwwLDEtMi45MiwxLjIzSDQzMmEzLjkzLDMuOTMsMCwwLDEtMi4zNC0uNzEsNC45Miw0LjkyLDAsMCwxLTEuNTgtMS44Nyw0Ljc5LDQuNzksMCwwLDEtLjQxLTEuODEsNC40LDQuNCwwLDAsMSwuMjQtMS4zNywzLjUxLDMuNTEsMCwwLDEsLjc2LTEuMzJxOC44OC0xMSwxNy43My0yMS44OHQxOC0yMi4yNEg0MzJhNC4yNSw0LjI1LDAsMCwxLTMtMS4yMyw0LjQ1LDQuNDUsMCwwLDEtMS4yOS0zLjA5LDMuODgsMy44OCwwLDAsMSwxLjQ2LTMuMjguMzcuMzcsMCwwLDEsLjI0LS4xMSw0LjA2LDQuMDYsMCwwLDEsMi42My0uOTRoNDEuNTVhNC4xLDQuMSwwLDAsMSwzLjkyLDIuNjkuNDcuNDcsMCwwLDAsMCwuMTgsMS40OSwxLjQ5LDAsMCwxLDAsLjE3bC0uMDUtLjE3YTQuNTQsNC41NCwwLDAsMCwuMjYuODEsMS42NiwxLjY2LDAsMCwxLC4xNC42NSw0LjM3LDQuMzcsMCwwLDEtLjIzLDEuMzcsMy41MiwzLjUyLDAsMCwxLS43NiwxLjMxcS05LDExLTE3Ljc5LDIxLjg2dC0xNy45MiwyMi4yN1oiLz48L2c+PC9nPjwvc3ZnPg==" style="height:28px;width:auto;display:block;opacity:0.65;" alt="BenefitWhiz"></div>
+  <div class="footer-logo"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MzEuNzMgMjEzLjEiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojZmZmO308L3N0eWxlPjwvZGVmcz48dGl0bGU+QldfbG9nb19yZXZlcnNlZDwvdGl0bGU+PGcgaWQ9IkxheWVyXzIiIGRhdGEtbmFtZT0iTGF5ZXIgMiI+PGcgaWQ9IkxheWVyXzEtMiIgZGF0YS1uYW1lPSJMYXllciAxIj48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik02OS43MiwyMDBhNjMsNjMsMCwwLDEtNjMtNjIuOTVWMjlhNS40LDUuNCwwLDEsMSwxMC44LDBWMTM3LjA1QTUyLjIxLDUyLjIxLDAsMCwwLDY5LjcyLDE4OS4yYzI4LjQ4LDAsNTAuNzktMjIuODYsNTAuNzktNTIsMC0xOC04LTMyLjY4LTIyLjIyLTQxLjM1bC42Miw0Ny40MWEyMy44MSwyMy44MSwwLDAsMS04LjIzLDE4LjQ3LDM2LjA5LDM2LjA5LDAsMCwxLTIyLjQyLDguNzgsNS4zMSw1LjMxLDAsMCwxLS44LDBINjYuOGMtMTAuMywwLTE5LjEzLTQuMTgtMjQuODUtMTEuNzZhMjAuNjIsMjAuNjIsMCwwLDEtNC4xMy0xMi4zNlYxMDEuNWE1LjQsNS40LDAsMCwxLDEwLjgsMHY0NC44OGE5Ljc2LDkuNzYsMCwwLDAsMS45NCw1Ljg1LDE4LjIxLDE4LjIxLDAsMCwwLDExLjc1LDcuMDlWOTAuMDdhNS40LDUuNCwwLDAsMSwxMC44LDBWMTU5YTI1LjIzLDI1LjIzLDAsMCwwLDEwLjU0LTUuNDcsMTMsMTMsMCwwLDAsNC40Ni0xMC4xM2wtLjc0LTU2LjA4YTUuNjUsNS42NSwwLDAsMSw3LjcxLTUuMTZjMjIuNjgsOS4zNiwzNi4yMiwyOS45MywzNi4yMiw1NUMxMzEuMywxNzIuNCwxMDQuMjUsMjAwLDY5LjcyLDIwMFpNNjkuNTgsNzAuMDdhNS40NSw1LjQ1LDAsMCwxLTEuNDEtLjE4LDUuNCw1LjQsMCwwLDEtNS40Ni01LjRjMC01MS44MS01NS4wOC01My42NC01Ny40My01My42OUE1LjQsNS40LDAsMCwxLDUuNSwwLDg5LjY3LDg5LjY3LDAsMCwxLDM5LjA5LDguMzdDNTAsMTMuNjEsNjIuMzUsMjIuODYsNjguODgsMzljNi41NS0xNiwxOC44Ni0yNS4yLDI5LjcxLTMwLjQyQTg5LjQ4LDg5LjQ4LDAsMCwxLDEzMi4xOC4xOSw1LjQsNS40LDAsMSwxLDEzMi40LDExaDBDMTMwLjA2LDExLDc1LDEyLjg2LDc1LDY0LjY4QTUuMzksNS4zOSwwLDAsMSw2OS41OCw3MC4wN1pNOTAuNzIsNTcuMzNhNS4zNCw1LjM0LDAsMCwxLTMuODEtMS41OCw1LjM5LDUuMzksMCwwLDEsMC03LjYzbDQuMjUtNC4yNmE1LjQsNS40LDAsMCwxLDcuNjMsNy42NGwtNC4yNSw0LjI1QTUuMzQsNS4zNCwwLDAsMSw5MC43Miw1Ny4zM1ptLTQ1LDBhNS4zNyw1LjM3LDAsMCwxLTMuODItMS41OEwzNy42Myw1MS41YTUuNCw1LjQsMCwwLDEsNy42NC03LjY0bDQuMjUsNC4yNmE1LjQsNS40LDAsMCwxLTMuODIsOS4yMVoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xODguNTksNTUuM2EzMC4xMywzMC4xMywwLDAsMSwzMC4xNSwzMC4xLDMwLDMwLDAsMCwxLTUxLjM3LDIxLjI3LDI4LjUxLDI4LjUxLDAsMCwxLTguODItMjEuMjdWNjAuOTFxMC02LjEzLDAtMTIuMjF0MC0xMi4zM2E0Ljg2LDQuODYsMCwwLDEsLjItMS41OCwzLDMsMCwwLDEsLjU2LTFBNS4yNyw1LjI3LDAsMCwxLDE2MywzMmE1LjM4LDUuMzgsMCwwLDEsMy41NiwxLjc2LDMuMSwzLjEsMCwwLDEsLjYyLDEuMDUsNC45MSw0LjkxLDAsMCwxLC4yLDEuNTJWNjQuMjRhMzUsMzUsMCwwLDEsMi44MS0yLjUxLDM1LjcyLDM1LjcyLDAsMCwxLDMtMi4xNiwzMy4yLDMzLjIsMCwwLDEsNy40OC0zLjE2QTI5LDI5LDAsMCwxLDE4OC41OSw1NS4zWm0wLDUxLjQ5QTIxLjI1LDIxLjI1LDAsMCwwLDIxMCw4NS40YTIwLjYsMjAuNiwwLDAsMC02LjItMTUuMTQsMjAuOTMsMjAuOTMsMCwwLDAtNy00LjdBMjEuNzMsMjEuNzMsMCwwLDAsMTg4LjU5LDY0LDIxLjE1LDIxLjE1LDAsMCwwLDE2Ny4zMSw4NS40YTIxLDIxLDAsMCwwLDYuMTQsMTUuMTRBMjAuNjEsMjAuNjEsMCwwLDAsMTg4LjU5LDEwNi43OVoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yODcuODYsODUuMTFjMCwuMTUsMCwuMzMsMCwuNTJhMi40OCwyLjQ4LDAsMCwxLS4yMS43MWwuMDYtLjA2YTMuOTMsMy45MywwLDAsMS00LjE1LDMuMTVIMjM3LjJhMTkuNzUsMTkuNzUsMCwwLDAsMiw2LjIsMjAuMzcsMjAuMzcsMCwwLDAsNC4xNSw1LjMyLDIwLDIwLDAsMCwwLDE0LjYxLDYsMjAuNDYsMjAuNDYsMCwwLDAsNS4wOS0uNjIsMjUuNDEsMjUuNDEsMCwwLDAsNC43OS0xLjc4aC0uMDZhMjAuOTQsMjAuOTQsMCwwLDAsNy42LTYuNzgsNC42OCw0LjY4LDAsMCwxLDIuOTItMS44MUgyNzlhNC41OSw0LjU5LDAsMCwxLDIuNC43LDQuMTQsNC4xNCwwLDAsMSwxLjkzLDIuODEuNzIuNzIsMCwwLDEsLjA4LjQxLDIuNzcsMi43NywwLDAsMCwwLC40Niw0LjM0LDQuMzQsMCwwLDEtLjgxLDIuNTIsMzAuOSwzMC45LDAsMCwxLTQuOCw1LjI2LDMyLjA2LDMyLjA2LDAsMCwxLTUuOSw0LjA5LDI5LjgyLDI5LjgyLDAsMCwxLTQzLjcxLTI2LjQydi0uODhhMzAsMzAsMCwwLDEsNTAuNzgtMjAuNjMsMzEuMTcsMzEuMTcsMCwwLDEsNi41NSw5LjQxQTI4LjkyLDI4LjkyLDAsMCwxLDI4Ny44Niw4NVptLTkuMjktNC4zM2EyMS4wOCwyMS4wOCwwLDAsMC0yLjM5LTUuODRBMjMuODQsMjMuODQsMCwwLDAsMjcyLjMyLDcwLDIyLjI2LDIyLjI2LDAsMCwwLDI2NS42OSw2NmEyMS4wOCwyMS4wOCwwLDAsMC0yMS45NSw0LjE4di0uMDZhMjAuOTQsMjAuOTQsMCwwLDAtNi4zNywxMC42OVoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0zMjIuMjMsNTUuODNhMjQuNDUsMjQuNDUsMCwwLDEsMjQuMzEsMjQuMzF2MzFhNS41OSw1LjU5LDAsMCwxLS4yMywxLjcsMi45LDIuOSwwLDAsMS0uOTQsMS4yOSwzLjg5LDMuODksMCwwLDEtMy4xLDEuMjgsNCw0LDAsMCwxLTMuMTUtMS4zNCw0LjM4LDQuMzgsMCwwLDEtMS4xNy0yLjkzdi0zMUExNS4wOCwxNS4wOCwwLDAsMCwzMzMuMzMsNjlhMTUuOCwxNS44LDAsMCwwLTIyLjIxLDAsMTUuMjEsMTUuMjEsMCwwLDAtNC41NSwxMS4xNnYzMWEzLjczLDMuNzMsMCwwLDEtMS4yMywzLDQuMiw0LjIsMCwwLDEtMy4xNiwxLjI4LDUuMzgsNS4zOCwwLDAsMS0xLjYtLjIzLDMuMDgsMy4wOCwwLDAsMS0xLjM4LTEsMy42NiwzLjY2LDAsMCwxLTEuMjMtM1Y3OS43OWEyNC40NSwyNC40NSwwLDAsMSwyNC4yNi0yNFoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00MTcsODUuMTFhNS4xMSw1LjExLDAsMCwxLDAsLjUyLDIuNDIsMi40MiwwLDAsMS0uMi43MWwuMDYtLjA2YTMuOTMsMy45MywwLDAsMS00LjE1LDMuMTVIMzY2LjM0YTE5Ljc3LDE5Ljc3LDAsMCwwLDIuMDUsNi4yLDIwLjM3LDIwLjM3LDAsMCwwLDQuMTUsNS4zMiwyMCwyMCwwLDAsMCwxNC42MSw2LDIwLjMyLDIwLjMyLDAsMCwwLDUuMDgtLjYyLDI1LjI0LDI1LjI0LDAsMCwwLDQuOC0xLjc4SDM5N2EyMS40NiwyMS40NiwwLDAsMCw0LjE1LTIuODYsMjEsMjEsMCwwLDAsMy40NC0zLjkyLDQuNzMsNC43MywwLDAsMSwyLjkzLTEuODFoLjY0YTQuNTksNC41OSwwLDAsMSwyLjQuNyw0LjEsNC4xLDAsMCwxLDEuOTIsMi44MS42Ni42NiwwLDAsMSwuMDkuNDEsMi43NywyLjc3LDAsMCwwLDAsLjQ2LDQuMjgsNC4yOCwwLDAsMS0uODIsMi41MiwzMC40MywzMC40MywwLDAsMS00Ljc5LDUuMjYsMzIuNCwzMi40LDAsMCwxLTUuOSw0LjA5LDI5LjgxLDI5LjgxLDAsMCwxLTQzLjcxLTI2LjQydi0uODhhMzAsMzAsMCwwLDEsNTAuNzgtMjAuNjMsMzEuMTcsMzEuMTcsMCwwLDEsNi41NSw5LjQxQTI5LjA5LDI5LjA5LDAsMCwxLDQxNyw4NVptLTkuMjktNC4zM2EyMS4xMSwyMS4xMSwwLDAsMC0yLjQtNS44NEEyMy44LDIzLjgsMCwwLDAsNDAxLjQ3LDcwLDIyLjE4LDIyLjE4LDAsMCwwLDM5NC44Myw2NmEyMS4wNiwyMS4wNiwwLDAsMC0yMS45NCw0LjE4di0uMDZhMjAuOTQsMjAuOTQsMCwwLDAtNi4zNywxMC42OVoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00NTksMzIuMjJhNC4yOCw0LjI4LDAsMCwxLDIuODYsMS4xNyw0LjIsNC4yLDAsMCwxLDEuNTgsMy4yMSw0LjI5LDQuMjksMCwwLDEtMS41OCwzLjI4QTQuMjEsNC4yMSwwLDAsMSw0NTksNDEuMWEyMiwyMiwwLDAsMC0yMi4yNywyMi4yMXYuMjNINDU0YTQuMjIsNC4yMiwwLDAsMSwzLjEsMS4yOSw0LjQ2LDQuNDYsMCwwLDEsMS4yMywzLjFBNC4zLDQuMywwLDAsMSw0NTcuMTEsNzFhNC4yMiw0LjIyLDAsMCwxLTMuMSwxLjI5SDQzNi43N3YzOC42M2E0LjE2LDQuMTYsMCwwLDEtMS4yMywzLjE2LDQuMzYsNC4zNiwwLDAsMS0zLjIxLDEuMjgsNC4yNSw0LjI1LDAsMCwxLTMuMS0xLjI4LDQuMzUsNC4zNSwwLDAsMS0xLjM0LTMuMTZWNjIuMzdhMzEuMTEsMzEuMTEsMCwwLDEsMi42LTExLjY4QTMxLjY2LDMxLjY2LDAsMCwxLDQzNy4zLDQxLDMwLjI1LDMwLjI1LDAsMCwxLDQ1OSwzMi4yMloiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00NzguNCw1NC4yNUE1LDUsMCwwLDEsNDgyLDU2LjA2YTcsNywwLDAsMSwuNTIsMS4wNiw0LDQsMCwwLDEsLjI0LDEuNTF2NTIuMzFhNC41Miw0LjUyLDAsMCwxLS4yNCwxLjYxLDQuMjcsNC4yNywwLDAsMS0uNTgsMS4wOCw1LDUsMCwwLDEtMy41NiwxLjc1LDQuMTksNC4xOSwwLDAsMS0zLTEuMzQsMy45MywzLjkzLDAsMCwxLTEuNDEtMy4xVjU4LjYzYTMuODUsMy44NSwwLDAsMSwxLjQxLTNBNC4xNiw0LjE2LDAsMCwxLDQ3OC40LDU0LjI1Wm0uMjMtMTYuODZhNC40NSw0LjQ1LDAsMCwxLDMuMSwxLjE3QTQuNjUsNC42NSwwLDAsMSw0ODMsNDEuNzh2My43NmE0LjQ4LDQuNDgsMCwwLDEtMS4yOCwzLjA5LDQuMTUsNC4xNSwwLDAsMS0zLDEuMjksMy45MiwzLjkyLDAsMCwxLTMuMS0xLjM0LDQuNjQsNC42NCwwLDAsMS0xLTEuNDQsMy43OSwzLjc5LDAsMCwxLS4zNS0xLjZWNDEuNzhhNC4xMiw0LjEyLDAsMCwxLDEuNC0zLjI4di4wNkE0LjExLDQuMTEsMCwwLDEsNDc4LjYzLDM3LjM5WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTUyNy4yOSwxMDYuNTZhNC4yNSw0LjI1LDAsMCwxLDMuMSwxLjM0LDQsNCwwLDAsMSwxLjM0LDMsNC4zNSw0LjM1LDAsMCwxLTEuMzQsMy4xNiw0LjI1LDQuMjUsMCwwLDEtMy4xLDEuMjgsMjkuNzcsMjkuNzcsMCwwLDEtMjEuNjItOC44MiwzMS45MywzMS45MywwLDAsMS02Ljc1LTkuNzMsMzEuNCwzMS40LDAsMCwxLTIuNi0xMS43MlYzNi42YTQuNTQsNC41NCwwLDAsMSwxLjM0LTMuMTUsNC4zMyw0LjMzLDAsMCwxLDMuMS0xLjIzLDQuNSw0LjUsMCwwLDEsMy4xNSwxLjIzLDQuMjUsNC4yNSwwLDAsMSwxLjIzLDMuMTVWNTVoMTcuMThhNC42LDQuNiwwLDAsMSwzLjE2LDEuMzUsNC4xNyw0LjE3LDAsMCwxLDEuMjMsMy4wOSw0LjQ4LDQuNDgsMCwwLDEtMS4yMywzLjIyLDUsNSwwLDAsMS0zLjE2LDEuMTdINTA1LjE0Vjg0LjU4YTIxLjYsMjEuNiwwLDAsMCw2LjU1LDE1LjU1QTIxLjM3LDIxLjM3LDAsMCwwLDUyNy4yOSwxMDYuNTZaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMzE3LjkzLDE1My4xNGEzLjczLDMuNzMsMCwwLDEsMi41NywxLC44NC44NCwwLDAsMSwuMzUuMTIsNCw0LDAsMCwxLDEuNDcsMy4yMXYzMS4yMUEyNC4zMiwyNC4zMiwwLDAsMSwyOTAuNjQsMjEyYTI3LDI3LDAsMCwxLTYuNjYtMy4yNCwzMC4zLDMwLjMsMCwwLDEtMy40Mi0yLjgxLDE5LjQ2LDE5LjQ2LDAsMCwxLTIuODQtMy4zMywyOC4yNiwyOC4yNiwwLDAsMS0yLjg5LDMuMzYsMjIuMTIsMjIuMTIsMCwwLDEtMy4zNiwyLjc4LDI3LjE1LDI3LjE1LDAsMCwxLTYuNjMsMy4yNCwyMy4yNSwyMy4yNSwwLDAsMS03LjI4LDEuMTRBMjQuNDUsMjQuNDUsMCwwLDEsMjMzLjEzLDE4OVYxNTcuNDZhMy43NiwzLjc2LDAsMCwxLDEuMjMtMywyLjkzLDIuOTMsMCwwLDEsMS40My0xLjA2LDUuOTEsNS45MSwwLDAsMSwxLjYxLS4yMyw0LDQsMCwwLDEsMS44NC40MSw0LjcyLDQuNzIsMCwwLDEsMS4zNywxLDMuODUsMy44NSwwLDAsMSwxLjEyLDIuODZ2MzEuMjFhMTUsMTUsMCwwLDAsNC42MSwxMS4xNiwxNS4zLDE1LjMsMCwwLDAsMTEuMjIsNC42OCwxNS43NywxNS43NywwLDAsMCwxNS43OC0xNS44NFYxNTcuNDZhNCw0LDAsMCwxLDEuNDYtMy4yMS41Ny41NywwLDAsMSwuNDEtLjEyLDMuNjgsMy42OCwwLDAsMSwyLjUxLTEsMy44OCwzLjg4LDAsMCwxLDMsMS40LDMuNzcsMy43NywwLDAsMSwuOTQsMS4yNiw0LjI2LDQuMjYsMCwwLDEsLjI5LDEuNjZ2MzEuMjFhMTYuMDcsMTYuMDcsMCwwLDAsMTUuOSwxNS44NCwxNS4yNCwxNS4yNCwwLDAsMCwxMS4xNi00LjY4LDE0Ljk0LDE0Ljk0LDAsMCwwLDQuNjctMTEuMTZWMTU3LjQ2YTQuMzksNC4zOSwwLDAsMSw0LjIxLTQuMzJaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMzYyLjU4LDE1Mi42N2EyNS4wNiwyNS4wNiwwLDAsMSwyNC41NCwyNC42MVYyMDguNmEzLjc5LDMuNzksMCwwLDEtMS4yOCwzLDQuMSw0LjEsMCwwLDEtMy4xLDEuMjksNC4yOCw0LjI4LDAsMCwxLTQuMjYtNC4zM1YxNzcuMjhhMTYsMTYsMCwwLDAtMTUuOS0xNS45LDE2LjA3LDE2LjA3LDAsMCwwLTE1Ljk1LDE1LjlWMjA4LjZhNC4yOSw0LjI5LDAsMCwxLTEuMTIsMyw0LDQsMCwwLDEtMy4yMSwxLjM1LDQuNzUsNC43NSwwLDAsMS0xLjY0LS4zLDMuNTksMy41OSwwLDAsMS0xLjQ2LTEsMy40NSwzLjQ1LDAsMCwxLS45LTEuMzQsNC41LDQuNSwwLDAsMS0uMzItMS43VjEzNGE1LjI2LDUuMjYsMCwwLDEsLjI2LTEuNzIsMywzLDAsMCwxLDEuMDgtMS40NGwtLjEyLjA2YTMuMTksMy4xOSwwLDAsMSwxLjQzLS45Myw1Ljc2LDUuNzYsMCwwLDEsMS42Ny0uMjQsNC4xMiw0LjEyLDAsMCwxLDMuMjEsMS4yOSw0LjQ0LDQuNDQsMCwwLDEsMS4xMiwzdjI0LjU1cS45My0uNzcsMS45Mi0xLjQ0Yy42Ny0uNDQsMS4yNy0uODIsMS44Mi0xLjE0YTI2LjU3LDI2LjU3LDAsMCwxLDUuOTMtMi40NUEyMi45NCwyMi45NCwwLDAsMSwzNjIuNTgsMTUyLjY3WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTQwNy41OSwxNTEuOGE0Ljk0LDQuOTQsMCwwLDEsMy42MiwxLjgxLDYuNDMsNi40MywwLDAsMSwuNTMsMSw0LjMsNC4zLDAsMCwxLC4yMywxLjUydjUyLjNhNC43NCw0Ljc0LDAsMCwxLS4yMywxLjYxLDQuMjksNC4yOSwwLDAsMS0uNTksMS4wOCw1LDUsMCwwLDEtMy41NiwxLjc2LDQuMTksNC4xOSwwLDAsMS0zLTEuMzUsMy45MiwzLjkyLDAsMCwxLTEuNC0zLjF2LTUyLjNhMy44NiwzLjg2LDAsMCwxLDEuNC0zQTQuMTgsNC4xOCwwLDAsMSw0MDcuNTksMTUxLjhabS4yMy0xNy44NmE0LjQ1LDQuNDUsMCwwLDEsMy4xLDEuMTcsNC41OSw0LjU5LDAsMCwxLDEuMjMsMy4yMXY0Ljc2YTQuNDksNC40OSwwLDAsMS0xLjI5LDMuMSw0LjE1LDQuMTUsMCwwLDEtMywxLjI5LDMuODcsMy44NywwLDAsMS0zLjA5LTEuMzUsNC44LDQuOCwwLDAsMS0xLTEuNDMsNCw0LDAsMCwxLS4zNS0xLjYxdi00Ljc2YTQuMTUsNC4xNSwwLDAsMSwxLjQtMy4yN3YuMDZBNC4xMiw0LjEyLDAsMCwxLDQwNy44MiwxMzMuOTRaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNDczLjUzLDIwNC4yMmE0LjM4LDQuMzgsMCwwLDEsMywxLjI4LDMuOTQsMy45NCwwLDAsMSwxLjM1LDMsMy43OCwzLjc4LDAsMCwxLTEuNDEsMy4xNiw0LjI0LDQuMjQsMCwwLDEtMi45MiwxLjIzSDQzMmEzLjkzLDMuOTMsMCwwLDEtMi4zNC0uNzEsNC45Miw0LjkyLDAsMCwxLTEuNTgtMS44Nyw0Ljc5LDQuNzksMCwwLDEtLjQxLTEuODEsNC40LDQuNCwwLDAsMSwuMjQtMS4zNywzLjUxLDMuNTEsMCwwLDEsLjc2LTEuMzJxOC44OC0xMSwxNy43My0yMS44OHQxOC0yMi4yNEg0MzJhNC4yNSw0LjI1LDAsMCwxLTMtMS4yMyw0LjQ1LDQuNDUsMCwwLDEtMS4yOS0zLjA5LDMuODgsMy44OCwwLDAsMSwxLjQ2LTMuMjguMzcuMzcsMCwwLDEsLjI0LS4xMSw0LjA2LDQuMDYsMCwwLDEsMi42My0uOTRoNDEuNTVhNC4xLDQuMSwwLDAsMSwzLjkyLDIuNjkuNDcuNDcsMCwwLDAsMCwuMTgsMS40OSwxLjQ5LDAsMCwxLDAsLjE3bC0uMDUtLjE3YTQuNTQsNC41NCwwLDAsMCwuMjYuODEsMS42NiwxLjY2LDAsMCwxLC4xNC42NSw0LjM3LDQuMzcsMCwwLDEtLjIzLDEuMzcsMy41MiwzLjUyLDAsMCwxLS43NiwxLjMxcS05LDExLTE3Ljc5LDIxLjg2dC0xNy45MiwyMi4yN1oiLz48L2c+PC9nPjwvc3ZnPg==" style="height:28px;width:auto;display:block;opacity:0.65;" alt="Benefit Whiz"></div>
   <span class="footer-copy">&copy; 2026 Benefit Whiz &middot; Commission visibility for modern brokerages.</span>
   <div class="footer-links">
-    <a href="#">Privacy Policy</a>
-    <a href="#">Terms of Service</a>
+    <a href="/privacy.html" target="_blank">Privacy Policy</a>
+    <a href="/terms.html" target="_blank">Terms of Service</a>
     <a href="#">benefitwhiz.io</a>
   </div>
 </footer>
@@ -895,6 +1293,306 @@
     for (var j = 0; j < 12; j++) {
       createWhoParticle();
     }
+  }
+})();
+</script>
+
+
+<script>
+function updateCalc() {
+  // Update background negative number
+  var bgNum = document.getElementById('calc-bg-num');
+  if (bgNum) {
+    var sliderVal = parseInt(document.getElementById('revenue-slider').value);
+    var leakage = sliderVal * 0.02;
+    var formatted;
+    if (leakage >= 1000000) formatted = '-$' + (leakage/1000000).toFixed(1) + 'M';
+    else formatted = '-$' + Math.round(leakage/1000) + 'K';
+    bgNum.textContent = formatted;
+    // Scale size based on amount - bigger loss = bigger number
+    var scale = 0.7 + (sliderVal / 10000000) * 0.8;
+    bgNum.style.fontSize = (scale * 7) + 'rem';
+    // Pulse red tint as it grows
+    var opacity = 0.05 + (sliderVal / 10000000) * 0.12;
+    bgNum.style.color = 'rgba(216,90,48,' + opacity + ')';
+  }
+  var slider = document.getElementById('revenue-slider');
+  var val = parseInt(slider.value);
+
+  // Format revenue display
+  document.getElementById('revenue-display').textContent = formatCurrency(val);
+
+  // 2% leakage
+  var leakageAnnual = val * 0.02;
+  var leakageMonthly = leakageAnnual / 12;
+  document.getElementById('leakage-annual').textContent = formatCurrency(Math.round(leakageAnnual));
+  document.getElementById('leakage-monthly').textContent = formatCurrency(Math.round(leakageMonthly));
+
+  // Time wasted: scales from 1 day ($100K) to 15 days ($10M)
+  var days = Math.round(1 + (val / 10000000) * 14);
+  document.getElementById('time-wasted').textContent = days + (days === 1 ? ' day' : ' days');
+
+  // Update slider gradient fill
+  var pct = ((val - 100000) / (10000000 - 100000)) * 100;
+  slider.style.background = 'linear-gradient(90deg, #665BA2 ' + pct + '%, #e0e0e0 ' + pct + '%)';
+}
+
+function formatCurrency(num) {
+  if (num >= 1000000) return '$' + (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+  if (num >= 1000) return '$' + (num / 1000).toFixed(0) + 'K';
+  return '$' + num;
+}
+
+// Init on load
+updateCalc();
+</script>
+
+
+<script>
+// ── PARTICLE TRAIL ──
+(function() {
+  var particles = [];
+  var colors = ['rgba(160,202,219,0.5)','rgba(102,91,162,0.4)','rgba(132,187,173,0.5)','rgba(207,197,158,0.4)'];
+  document.addEventListener('mousemove', function(e) {
+    var p = document.createElement('div');
+    p.className = 'particle-trail';
+    p.style.left = e.clientX + 'px';
+    p.style.top  = e.clientY + 'px';
+    p.style.width  = (6 + Math.random() * 8) + 'px';
+    p.style.height = p.style.width;
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    document.body.appendChild(p);
+    setTimeout(function() {
+      p.style.transition = 'opacity 0.5s, transform 0.5s';
+      p.style.opacity = '0';
+      p.style.transform = 'translate(-50%,-50%) scale(0)';
+    }, 50);
+    setTimeout(function() { p.remove(); }, 600);
+  });
+})();
+
+// ── TYPEWRITER ──
+function typeWriter(el, text, speed, delay) {
+  setTimeout(function() {
+    el.textContent = '';
+    var i = 0;
+    var timer = setInterval(function() {
+      el.textContent += text[i];
+      i++;
+      if (i >= text.length) clearInterval(timer);
+    }, speed);
+  }, delay);
+}
+
+// ── COUNTER ──
+function animateCounter(el, target, duration, prefix, suffix) {
+  prefix = prefix || '$';
+  suffix = suffix || '.00';
+  var start = 0;
+  var step = target / (duration / 16);
+  var timer = setInterval(function() {
+    start += step;
+    if (start >= target) { start = target; clearInterval(timer); }
+    el.textContent = prefix + Math.round(start).toLocaleString() + suffix;
+  }, 16);
+}
+
+// ── STAT COUNTER ──
+function animateStatCounter(el, target, suffix, duration) {
+  var start = 0;
+  var step = target / (duration / 16);
+  var timer = setInterval(function() {
+    start += step;
+    if (start >= target) { start = target; clearInterval(timer); }
+    el.textContent = Math.round(start) + suffix;
+  }, 16);
+}
+
+// ── RUN RECON ANIMATIONS ──
+function runReconAnimations() {
+  var typewriters = document.querySelectorAll('.typewriter');
+  typewriters.forEach(function(el, i) {
+    typeWriter(el, el.getAttribute('data-text'), 60, 300 + i * 600);
+  });
+  var counters = document.querySelectorAll('.counter');
+  counters.forEach(function(el, i) {
+    var target = parseInt(el.getAttribute('data-target'));
+    setTimeout(function() {
+      animateCounter(el, target, 800, '$', '.00');
+    }, 800 + i * 600);
+  });
+}
+
+// Run on load
+window.addEventListener('load', function() {
+  runReconAnimations();
+
+  // Stat counters when scrolled into view
+  var statsBar = document.querySelector('.hero-stats-row');
+  if (statsBar) {
+    var statsObs = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) {
+        var statEls = document.querySelectorAll('.counter-stat');
+        statEls.forEach(function(el) {
+          var target = parseInt(el.getAttribute('data-target'));
+          var suffix = el.getAttribute('data-suffix') || '';
+          animateStatCounter(el, target, suffix, 1500);
+        });
+        statsObs.disconnect();
+      }
+    }, { threshold: 0.5 });
+    statsObs.observe(statsBar);
+  }
+});
+
+// ── BEFORE/AFTER TOGGLE ──
+function showBefore() {
+  document.getElementById('ba-card-before').classList.remove('hidden');
+  document.getElementById('ba-card-after').classList.add('hidden');
+  document.getElementById('ba-before').classList.add('active');
+  document.getElementById('ba-after').classList.remove('active');
+}
+function showAfter() {
+  document.getElementById('ba-card-after').classList.remove('hidden');
+  document.getElementById('ba-card-before').classList.add('hidden');
+  document.getElementById('ba-after').classList.add('active');
+  document.getElementById('ba-before').classList.remove('active');
+}
+
+
+</script>
+
+
+<script>
+(function() {
+  var slideEls = document.querySelectorAll('.slide-left, .slide-right');
+  if (!slideEls.length) return;
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.3 });
+  slideEls.forEach(function(el) { obs.observe(el); });
+})();
+</script>
+
+
+<script>
+(function() {
+  var reveals = document.querySelectorAll('.reveal');
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        // Remove visible so it re-animates on scroll back up
+        entry.target.classList.remove('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  reveals.forEach(function(el) { observer.observe(el); });
+})();
+</script>
+
+
+<script>
+(function() {
+  var hasAnimated = false;
+
+  function animateBroken() {
+    var word = document.getElementById('broken-word');
+    var container = document.getElementById('spill-container');
+    if (!word || !container) return;
+
+    container.innerHTML = '';
+
+    // Split "broken" into individual characters and drop them
+    var text = 'broken';
+    word.innerHTML = text.split('').map(function(c, i) {
+      return '<span class="broken-char" style="animation-delay:' + (0.3 + i * 0.08) + 's">' + c + '</span>';
+    }).join('');
+
+    setTimeout(function() {
+      word.querySelectorAll('.broken-char').forEach(function(el) {
+        el.classList.add('drop');
+      });
+    }, 400);
+
+    // Spill dollar signs from where the word was
+    var wordRect = word.getBoundingClientRect();
+    var containerRect = container.getBoundingClientRect();
+    var offsetX = wordRect.left - containerRect.left;
+
+    for (var i = 0; i < 12; i++) {
+      (function(idx) {
+        setTimeout(function() {
+          var d = document.createElement('div');
+          d.className = 'spill-dollar';
+          d.textContent = '$';
+          var size = 12 + Math.random() * 18;
+          var x = offsetX + (Math.random() - 0.3) * 120;
+          var rot = (Math.random() - 0.5) * 60;
+          var dur = 0.8 + Math.random() * 0.6;
+          d.style.fontSize = size + 'px';
+          d.style.left = x + 'px';
+          d.style.top = '0px';
+          d.style.setProperty('--rot', rot + 'deg');
+          d.style.animationDuration = dur + 's';
+          container.appendChild(d);
+          setTimeout(function() { d.remove(); }, dur * 1000 + 100);
+        }, 500 + idx * 80);
+      })(i);
+    }
+
+    // Restore "broken" text after animation
+    setTimeout(function() {
+      word.innerHTML = 'broken';
+    }, 2200);
+  }
+
+  // Trigger on scroll into view, re-trigger each time
+  var section = document.querySelector('.problems');
+  if (!section) return;
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        setTimeout(animateBroken, 600);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  obs.observe(section);
+})();
+</script>
+
+
+<script>
+(function() {
+  var btn = document.getElementById('nav-hamburger');
+  var links = document.getElementById('nav-links');
+  if (!btn || !links) return;
+
+  btn.addEventListener('click', function() {
+    btn.classList.toggle('open');
+    links.classList.toggle('open');
+  });
+
+  // Close menu when a link is clicked
+  links.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      btn.classList.remove('open');
+      links.classList.remove('open');
+    });
+  });
+
+  // Disable particle trail on touch devices
+  if ('ontouchstart' in window) {
+    document.removeEventListener('mousemove', function(){});
   }
 })();
 </script>
