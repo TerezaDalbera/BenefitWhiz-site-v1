@@ -754,21 +754,24 @@
     .calc-heading { font-size: 1.3rem !important; }
     .tl-step { flex: 0 0 calc(50% - 0.5rem); }
 
-    /* Constrain recon card on small phones */
+    /* Recon card — stack panels vertically on mobile */
     .recon-wrap { width: 100%; max-width: 100%; overflow: hidden; }
-    .recon-card { padding: 0.75rem 0.6rem; }
-    .recon-title { font-size: 11px; }
-    .recon-body { gap: 0; }
-    .recon-divider { margin: 0 0.2rem; width: 1px; }
-    .recon-panel { min-width: 0; flex: 1 1 0; }
-    .rrow-name { font-size: 9.5px; }
-    .rrow-sub  { font-size: 8.5px; }
-    .rrow-amt  { font-size: 9.5px; }
-    .rrow-check { width: 14px; height: 14px; font-size: 8px; }
-    .rrow-match-label, .rrow-mismatch-label, .rrow-notpaid-label { font-size: 7.5px; }
-    .flag-banner-title { font-size: 10px; }
-    .flag-banner-sub { font-size: 9px; }
-    .recon-flag-banner { padding: 0.4rem 0.6rem; }
+    .recon-card { padding: 1rem 0.85rem; }
+    .recon-title { font-size: 12px; margin-bottom: 0.75rem; }
+    .recon-body { flex-direction: column; gap: 0.75rem; }
+    .recon-divider { display: none; }
+    .recon-panel { width: 100%; flex: unset; }
+    .recon-panel-hdr { padding-bottom: 0.5rem; margin-bottom: 0.5rem; }
+    .rpanel-title { font-size: 12px; }
+    .rpanel-sub { font-size: 11px; }
+    .rrow-name { font-size: 12px; }
+    .rrow-sub  { font-size: 10px; }
+    .rrow-amt  { font-size: 12px; }
+    .rrow-check { width: 18px; height: 18px; font-size: 10px; }
+    .rrow-match-label, .rrow-mismatch-label, .rrow-notpaid-label { font-size: 9px; }
+    .flag-banner-title { font-size: 11px; }
+    .flag-banner-sub { font-size: 10px; }
+    .recon-flag-banner { padding: 0.5rem 0.75rem; }
   }
 
 
@@ -780,6 +783,7 @@
   }
   .ba-cards { position: relative; }
   #ba-card-after { position: relative; overflow: hidden; }
+
 
 </style>
 </head>
