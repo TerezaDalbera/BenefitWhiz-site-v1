@@ -96,7 +96,7 @@
   .hero h1 em { font-style: italic; color: var(--akaroa); }
   .hero-desc { font-size: 17px; color: rgba(255,255,255,0.7); margin-bottom: 2.5rem; max-width: 480px; line-height: 1.7; }
   .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
-  .btn-primary { background: var(--scampi); color: #fff; padding: 14px 28px; border-radius: 10px; font-weight: 700; font-size: 15px; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.15s; letter-spacing: 0.2px; }
+  .btn-primary { background: var(--scampi); color: #fff; padding: 14px 28px; border-radius: 10px; font-weight: 700; font-size: 15px; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.15s; letter-spacing: 0.2px; border: 2px solid rgba(255,255,255,0.5); }
   .btn-primary:hover { background: var(--rich-blue); transform: translateY(-2px); }
   .btn-gold {
     background: transparent; color: var(--akaroa);
@@ -397,7 +397,7 @@
     <li><a href="#how">How It Works</a></li>
     <li><a href="#platform">Platform</a></li>
     <li><a href="#who">Who It&rsquo;s For</a></li>
-    <li><a href="#contact" class="nav-cta">Request Early Access</a></li>
+    <li><a href="#contact" class="nav-cta">Get Started &mdash; Free</a></li>
   </ul>
 </nav>
 
@@ -408,7 +408,7 @@
 
   <div class="hero-grid">
     <div>
-      <div class="hero-eyebrow fu"><div class="eyebrow-dot"></div>Now in early access</div>
+      <div class="hero-eyebrow fu"><div class="eyebrow-dot"></div>Launching now &mdash; free for early adopters</div>
       <h1 class="fu d1">Stop trusting commission statements <span style="color:var(--akaroa);">blindly.</span></h1>
       <p class="hero-desc fu d2">Benefit Whiz helps insurance brokers upload carrier statements, catch missing or inaccurate payments, track expected vs. actual revenue, and take the guesswork out of internal payouts.</p>
       <div class="hero-actions fu d3">
@@ -683,16 +683,18 @@
 <section class="cta-section" id="contact">
   <div class="container">
     <div class="cta-inner">
-      <div class="pill" style="color:var(--aqua-island);background:rgba(160,202,219,0.12);border:1px solid rgba(160,202,219,0.25);">Early Access</div>
+      <div class="pill" style="color:var(--aqua-island);background:rgba(160,202,219,0.12);border:1px solid rgba(160,202,219,0.25);">Free Early Access</div>
       <h2 class="sec-h2 on-dark">Ready to stop guessing what you&rsquo;re owed?</h2>
-      <p class="sec-sub on-dark">BenefitWhiz is available to a select group of independent brokerages. Your first reconciliation run is guided hands-on by our team.</p>
-      <div class="cta-form">
+      <p class="sec-sub on-dark">BenefitWhiz is free to get started. Available to a select group of independent brokerages &mdash; your first reconciliation run is guided hands-on by our team. No credit card required.</p>
+      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="cta-form">
+        <input type="hidden" name="form-name" value="contact">
+        <p style="display:none;"><input name="bot-field"></p>
         <div class="form-row"><label>Full Name</label><input type="text" placeholder="Jane Smith" /></div>
         <div class="form-row"><label>Work Email</label><input type="email" placeholder="jane@yourbrokerage.com" /></div>
         <div class="form-row"><label>Company / Agency Name</label><input type="text" placeholder="Apex Benefits Group" /></div>
         <div class="form-row"><label>How are you managing commissions today? <span style="opacity:0.45;font-weight:400;">(optional)</span></label><textarea placeholder="Spreadsheets, manual review, a mix of tools&hellip;"></textarea></div>
-        <button class="form-btn">Request Early Access &rarr;</button>
-      </div>
+        <button type="submit" class="form-btn">Request Early Access &rarr;</button>
+      </form>
     </div>
   </div>
 </section>
