@@ -689,10 +689,10 @@
       <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="cta-form">
         <input type="hidden" name="form-name" value="contact">
         <p style="display:none;"><input name="bot-field"></p>
-        <div class="form-row"><label>Full Name</label><input type="text" placeholder="Jane Smith" /></div>
-        <div class="form-row"><label>Work Email</label><input type="email" placeholder="jane@yourbrokerage.com" /></div>
-        <div class="form-row"><label>Company / Agency Name</label><input type="text" placeholder="Apex Benefits Group" /></div>
-        <div class="form-row"><label>How are you managing commissions today? <span style="opacity:0.45;font-weight:400;">(optional)</span></label><textarea placeholder="Spreadsheets, manual review, a mix of tools&hellip;"></textarea></div>
+        <div class="form-row"><label>Full Name</label><input type="text" name="name" placeholder="Jane Smith" required /></div>
+        <div class="form-row"><label>Work Email</label><input type="email" name="email" placeholder="jane@yourbrokerage.com" required /></div>
+        <div class="form-row"><label>Company / Agency Name</label><input type="text" name="company" placeholder="Apex Benefits Group" /></div>
+        <div class="form-row"><label>How are you managing commissions today? <span style="opacity:0.45;font-weight:400;">(optional)</span></label><textarea name="message" placeholder="Spreadsheets, manual review, a mix of tools&hellip;"></textarea></div>
         <button type="submit" class="form-btn">Request Early Access &rarr;</button>
       </form>
     </div>
