@@ -754,18 +754,21 @@
     .calc-heading { font-size: 1.3rem !important; }
     .tl-step { flex: 0 0 calc(50% - 0.5rem); }
 
-    /* Hide complex recon animation on small phones - show simple stat instead */
-    .recon-wrap { display: none; }
-    .hero-mobile-stat {
-      display: flex !important;
-      flex-direction: column; align-items: center; gap: 0.5rem;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(160,202,219,0.2);
-      border-radius: 14px; padding: 1.5rem;
-      text-align: center; margin-top: 0.5rem;
-    }
-    .hms-num { font-size: 2.5rem; font-weight: 800; color: var(--aqua-island); line-height: 1; }
-    .hms-label { font-size: 13px; color: rgba(255,255,255,0.6); }
+    /* Constrain recon card on small phones */
+    .recon-wrap { width: 100%; max-width: 100%; overflow: hidden; }
+    .recon-card { padding: 0.75rem 0.6rem; }
+    .recon-title { font-size: 11px; }
+    .recon-body { gap: 0; }
+    .recon-divider { margin: 0 0.2rem; width: 1px; }
+    .recon-panel { min-width: 0; flex: 1 1 0; }
+    .rrow-name { font-size: 9.5px; }
+    .rrow-sub  { font-size: 8.5px; }
+    .rrow-amt  { font-size: 9.5px; }
+    .rrow-check { width: 14px; height: 14px; font-size: 8px; }
+    .rrow-match-label, .rrow-mismatch-label, .rrow-notpaid-label { font-size: 7.5px; }
+    .flag-banner-title { font-size: 10px; }
+    .flag-banner-sub { font-size: 9px; }
+    .recon-flag-banner { padding: 0.4rem 0.6rem; }
   }
 
 </style>
