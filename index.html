@@ -9,6 +9,7 @@
 <style>
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { max-width: 100%; overflow-x: hidden; }
 
   :root {
     --blue-zodiac:    #394050;
@@ -664,7 +665,7 @@
     .nav-cta { display: inline-block; margin-top: 0.5rem; text-align: center; }
 
     /* HERO */
-    .hero { padding: 80px 1.25rem 40px; min-height: auto; }
+    .hero { padding: 80px 1.25rem 40px; min-height: auto; overflow-x: hidden; }
     .hero-grid { grid-template-columns: 1fr !important; gap: 1.5rem; }
     .hero h1, .hero-h1 { font-size: 1.8rem !important; line-height: 1.2 !important; }
     .hero-eyebrow { font-size: 10px; padding: 5px 10px; }
@@ -748,12 +749,23 @@
   }
 
   @media (max-width: 480px) {
-    .hero-h1, .hero h1 { font-size: 1.7rem !important; }
-    .calc-heading { font-size: 1.4rem !important; }
+    html, body { overflow-x: hidden; max-width: 100%; }
+    .hero-h1, .hero h1 { font-size: 1.5rem !important; }
+    .calc-heading { font-size: 1.3rem !important; }
     .tl-step { flex: 0 0 calc(50% - 0.5rem); }
-    .recon-panels { flex-direction: column; }
-    .recon-divider { display: none; }
-    #panel-right { border-top: 1px solid rgba(160,202,219,0.15); padding-top: 0.5rem; }
+
+    /* Hide complex recon animation on small phones - show simple stat instead */
+    .recon-wrap { display: none; }
+    .hero-mobile-stat {
+      display: flex !important;
+      flex-direction: column; align-items: center; gap: 0.5rem;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(160,202,219,0.2);
+      border-radius: 14px; padding: 1.5rem;
+      text-align: center; margin-top: 0.5rem;
+    }
+    .hms-num { font-size: 2.5rem; font-weight: 800; color: var(--aqua-island); line-height: 1; }
+    .hms-label { font-size: 13px; color: rgba(255,255,255,0.6); }
   }
 
 </style>
