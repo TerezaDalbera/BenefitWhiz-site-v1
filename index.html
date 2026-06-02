@@ -785,6 +785,31 @@
   #ba-card-after { position: relative; overflow: hidden; }
 
 
+
+  /* ── SLIDER DRIP EFFECT ── */
+  .calc-slider-wrap {
+    position: relative;
+    padding-bottom: 40px;
+  }
+  .drip-dollar {
+    position: absolute;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    pointer-events: none;
+    animation: dripDown 0.8s ease-in forwards;
+    z-index: 10;
+  }
+  @keyframes dripDown {
+    0%   { opacity: 1; transform: translateY(0) scale(1); }
+    70%  { opacity: 0.8; }
+    100% { opacity: 0; transform: translateY(50px) scale(0.6); }
+  }
+
+  /* Card color shift */
+  .calc-card {
+    transition: background 0.4s ease, border-color 0.4s ease;
+  }
+
 </style>
 </head>
 <body>
@@ -893,9 +918,9 @@
         <div class="recon-flag-banner" id="flag-banner">
           <span class="flag-banner-icon">&#9888;</span>
           <div>
-            <div class="flag-banner-title">Missing / Unpaid Items</div>
-            <div class="flag-banner-sub">&#8226; 1 item flagged for review &mdash; amount mismatch detected</div>
-            <div class="flag-banner-sub">&#8226; 1 item flagged for review &mdash; no payment received</div>
+            <div class="flag-banner-title" style="color:#fff;font-size:13px;font-weight:800;margin-bottom:4px;">Missing / Unpaid Items</div>
+            <div class="flag-banner-sub" style="color:rgba(255,255,255,0.9);font-size:12px;font-weight:700;">&#8226; 1 item flagged for review &mdash; amount mismatch detected</div>
+            <div class="flag-banner-sub" style="color:rgba(255,255,255,0.9);font-size:12px;font-weight:700;">&#8226; 1 item flagged for review &mdash; no payment received</div>
           </div>
         </div>
 
@@ -930,9 +955,11 @@
       <div class="calc-bg-num" id="calc-bg-num">-$40K</div>
       <div class="calc-label">Annual commission revenue</div>
       <div class="calc-value-display" id="revenue-display">$2,000,000</div>
+      <div class="calc-slider-wrap" id="slider-wrap">
       <input type="range" class="calc-slider" id="revenue-slider"
         min="100000" max="10000000" step="50000" value="2000000"
         oninput="updateCalc()">
+      </div>
       <div class="calc-range-labels">
         <span>$100K</span>
         <span>$10M</span>
@@ -1340,6 +1367,44 @@
 
 <script>
 function updateCalc() {
+  // ── CARD COLOR SHIFT ──
+  var card = document.querySelector('.calc-card');
+  if (card) {
+    var sliderPct = (parseInt(document.getElementById('revenue-slider').value) - 100000) / (10000000 - 100000);
+    var r = Math.round(245 + sliderPct * 10);
+    var g = Math.round(244 - sliderPct * 30);
+    var b = Math.round(251 - sliderPct * 40);
+    card.style.background = 'rgb(' + r + ',' + g + ',' + b + ')';
+    var borderR = Math.round(189 + sliderPct * 60);
+    var borderG = Math.round(195 - sliderPct * 100);
+    var borderB = Math.round(215 - sliderPct * 130);
+    card.style.borderColor = 'rgba(' + borderR + ',' + borderG + ',' + borderB + ',0.6)';
+  }
+
+  // ── DRIP DOLLARS ──
+  var wrap = document.getElementById('slider-wrap');
+  var sl = document.getElementById('revenue-slider');
+  if (wrap && sl) {
+    var pct = (sl.value - sl.min) / (sl.max - sl.min);
+    var thumbX = pct * (sl.offsetWidth - 24) + 12;
+    var colors = ['#CFC59E','#665BA2','#84BBAD','#A0CADB'];
+    for (var d = 0; d < 2; d++) {
+      (function() {
+        var el = document.createElement('div');
+        el.className = 'drip-dollar';
+        el.textContent = '$';
+        var size = 10 + Math.random() * 10;
+        el.style.fontSize = size + 'px';
+        el.style.color = colors[Math.floor(Math.random() * colors.length)];
+        el.style.left = (thumbX + (Math.random() - 0.5) * 20) + 'px';
+        el.style.top = '16px';
+        el.style.animationDelay = (Math.random() * 0.2) + 's';
+        wrap.appendChild(el);
+        setTimeout(function() { el.remove(); }, 1000);
+      })();
+    }
+  }
+
   // Update background negative number
   var bgNum = document.getElementById('calc-bg-num');
   if (bgNum) {
